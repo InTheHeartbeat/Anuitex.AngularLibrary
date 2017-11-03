@@ -21,11 +21,23 @@ namespace Anuitex.AngularLibrary
 
                  bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/angular.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/App/modules.js",
+                      "~/Scripts/App/Services/booksService.js",
+                      "~/Scripts/App/Services/accountService.js",
+                      "~/Scripts/App/Controllers/booksController.js",
+                      "~/Scripts/App/Controllers/accountController.js",
+                      "~/Scripts/App/directives.js",
+                      "~/Scripts/respond.js",
+                     "~/Scripts/ngDialog.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+            "~/Content/Styles/Site.css",
+            "~/Content/Styles/Icons.css",
+            "~/Content/Styles/select2.css",
+                "~/Content/Styles/ngDialog.min.css",
+                "~/Content/Styles/ngDialog-theme-flat.css"));
         }
     }
 }

@@ -1,0 +1,42 @@
+﻿[
+  {
+    "outputFile": "Content/Styles/Site.css",
+    "inputFile": "Content/Styles/Site.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Colors.css",
+    "inputFile": "Content/Styles/Theme/Colors.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Components.css",
+    "inputFile": "Content/Styles/Theme/Components.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Controls.css",
+    "inputFile": "Content/Styles/Theme/Controls.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Global.css",
+    "inputFile": "Content/Styles/Theme/Global.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Icons.css",
+    "inputFile": "Content/Styles/Theme/Icons.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Layout.css",
+    "inputFile": "Content/Styles/Theme/Layout.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Main.css",
+    "inputFile": "Content/Styles/Theme/Main.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Variables.css",
+    "inputFile": "Content/Styles/Theme/Variables.less"
+  },
+  {
+    "outputFile": "Content/Styles/Theme/Windows.css",
+    "inputFile": "Content/Styles/Theme/Windows.less"
+  }
+]

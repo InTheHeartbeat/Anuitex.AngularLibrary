@@ -82,6 +82,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -156,13 +157,94 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\AccountController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Library.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Library.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Models\AccountModel.cs" />
+    <Compile Include="Data\Models\BookModel.cs" />
+    <Compile Include="Data\Models\JournalModel.cs" />
+    <Compile Include="Data\Models\NewspaperModel.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\BooksCollectionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\LibraryDatabase.mdf" />
+    <Content Include="App_Data\LibraryDatabase_log.ldf">
+      <DependentUpon>LibraryDatabase.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\ngDialog-theme-flat.css" />
+    <Content Include="Content\Styles\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Colors.css">
+      <DependentUpon>Colors.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Colors.min.css">
+      <DependentUpon>Colors.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Components.css">
+      <DependentUpon>Components.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Components.min.css">
+      <DependentUpon>Components.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Controls.css">
+      <DependentUpon>Controls.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Controls.min.css">
+      <DependentUpon>Controls.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Global.css">
+      <DependentUpon>Global.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Global.min.css">
+      <DependentUpon>Global.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Icons.css">
+      <DependentUpon>Icons.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Icons.min.css">
+      <DependentUpon>Icons.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Layout.css">
+      <DependentUpon>Layout.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Layout.min.css">
+      <DependentUpon>Layout.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Main.css">
+      <DependentUpon>Main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Main.min.css">
+      <DependentUpon>Main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Variables.css">
+      <DependentUpon>Variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Theme\Variables.min.css">
+      <DependentUpon>Variables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Templates\books.html" />
+    <Content Include="Content\Images\Backgrounds\DefaultProjectPhoto.png" />
+    <Content Include="Content\Images\Backgrounds\MainBackground.jpg" />
+    <Content Include="Content\Styles\ngDialog-theme-plain.min.css" />
+    <Content Include="Content\Styles\ngDialog.min.css" />
+    <Content Include="Content\Styles\select2.css" />
+    <Content Include="Content\Templates\Modal\signInDialogTemplate.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -196,6 +278,13 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\Controllers\accountController.js" />
+    <Content Include="Scripts\App\Controllers\booksController.js" />
+    <Content Include="Scripts\App\directives.js" />
+    <Content Include="Scripts\App\modules.js" />
+    <Content Include="Scripts\App\Services\accountService.js" />
+    <Content Include="Scripts\App\Services\booksService.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -947,6 +1036,28 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Data\Library.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Library.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Styles\Site.less" />
+    <Content Include="Content\Styles\Theme\Colors.less" />
+    <Content Include="Content\Styles\Theme\Components.less" />
+    <Content Include="Content\Styles\Theme\Controls.less" />
+    <Content Include="Content\Styles\Theme\Global.less" />
+    <Content Include="Content\Styles\Theme\Icons.less" />
+    <Content Include="Content\Styles\Theme\Layout.less" />
+    <Content Include="Content\Styles\Theme\Main.less" />
+    <Content Include="Content\Styles\Theme\Variables.less" />
+    <Content Include="Content\Styles\Theme\Windows.less" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="Data\Library.dbml.layout">
+      <DependentUpon>Library.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -958,10 +1069,33 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ngDialog.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Upload\Images\02bb4796-1aa6-495d-803d-c6e2da371586.jpg" />
+    <Content Include="Upload\Images\1765fda5-2a1b-4d8a-ad54-7d4c03423372.jpg" />
+    <Content Include="Upload\Images\25d97dff-aa43-4de9-bbe0-218aeb5345ce.jpg" />
+    <Content Include="Upload\Images\26bf4bc1-29d6-42ea-9403-dfbff34bc6b6.jpg" />
+    <Content Include="Upload\Images\2a591238-ad7f-4b65-8494-bbe888ebefda.jpg" />
+    <Content Include="Upload\Images\2dfdf650-0d46-4d85-b8bf-2bb6f91b6fd0.jpeg" />
+    <Content Include="Upload\Images\36a4ff89-446d-499a-b6fe-b9fe783911f0.jpg" />
+    <Content Include="Upload\Images\452b0650-52fa-4984-9692-3818a23feec5.jpg" />
+    <Content Include="Upload\Images\466ef7b2-5152-4e1d-889a-591e8aaec457.jpg" />
+    <Content Include="Upload\Images\6541fcbe-04b1-40af-b911-cbe5307b4c00.jpg" />
+    <Content Include="Upload\Images\701ed393-b8d2-4283-9177-a22ae02d3d96.jpg" />
+    <Content Include="Upload\Images\71bdb91e-ffa5-42a3-a1e6-8b934ed40ab8.jpg" />
+    <Content Include="Upload\Images\b76a0a53-cdda-4fbb-979f-721401ea1bd8.jpg" />
+    <Content Include="Upload\Images\bdb00ac9-d287-43f4-ae75-afe43e3a3ea5.jpg" />
+    <Content Include="Upload\Images\c0132759-3abb-43ff-a136-d8721ea5e15f.jpg" />
+    <Content Include="Upload\Images\cbc709b9-e4b1-49f0-88b9-10d41e2b84c3.jpg" />
+    <Content Include="Upload\Images\cbe0bec3-b24a-4389-aa37-bdcddcba5c58.jpg" />
+    <Content Include="Upload\Images\d2c3854f-1ffb-48ad-b241-bec97b31b406.jpg" />
+    <Content Include="Upload\Images\ead71db9-77cd-4bc7-944d-996859606112.jpg" />
+    <Content Include="Upload\Images\f48c67a4-8ce1-4d06-b847-41ea5d70f635.jpg" />
+    <Content Include="Upload\Images\f5e77bbc-01d0-4945-b465-79d876aa969d.jpg" />
+    <Content Include="Upload\Images\no-photo.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -973,19 +1107,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\Images\Icons\" />
+    <Folder Include="Views\Books\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,449 @@
+﻿@import "Theme/Main.less";
+
+body{background-image:url(../Images/Backgrounds/MainBackground.jpg);}
+
+#index-container
+{
+    position:absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.btn-submit
+{
+    padding: 0;
+    width: 26px;
+    height: 26px;
+}
+
+
+.btn-accept-order
+{
+    width:26px;
+    height:26px;
+  float:right;
+  margin-left: 6em;
+  //margin-top:-1em;
+}
+
+
+.btn-buy
+{
+    width: 35px;
+    height: 35px;
+    position:absolute;
+    bottom:1em;
+    right:1em;
+}
+
+.nav-sector-controls
+{
+    >*{display:inline-block;}
+    h4{margin:0;}
+    .btn
+    {
+        margin-left:0.6em;
+        .icon{width:26px;height:26px;}
+    }    
+    .btn-submit
+    {
+        float:right;
+        margin-left:3em;
+    }
+    .order-details
+    {
+        h4{margin-right:3em;display:inline-block;}
+    }
+}
+
+
+.field-validation-error
+    {
+    font-size:0.85em;
+    color:red;
+    text-align:center;
+    display:inline-block !important;                    
+}
+.validation-summary-errors
+{
+    color:red;
+    ul{list-style:none;}
+}
+
+.nav-status-icon
+{
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    margin-top: 0.3em;
+}
+
+
+.entity-photo 
+{ 
+    width:31%;
+    height:94%;     
+    margin-right:0.2em;      
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-color:transparent;
+    background-position:center;
+    cursor:zoom-in;
+    float:left;
+}
+
+.signin-window
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    .window
+    {
+        height:190px !important;
+        .window-content
+        {
+            padding-top:1em!important;
+        }
+    }
+    :nth-last-child(2)
+    {
+        margin-bottom:1em;
+    }
+    input[type=submit]
+    {
+        margin:0 auto;
+        display:block;        
+    }
+}
+
+.signup-window
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    .window
+    {
+        height:230px !important;
+        .window-content
+        {
+            padding-top:1em!important;
+        }
+    }
+    :nth-last-child(2)
+    {
+        margin-bottom:1em;
+    }
+    input[type=submit]
+    {
+        margin:0 auto;
+        display:block;        
+    }
+}
+
+#add-journal-window, #add-newspaper-window
+{
+    .window 
+    {
+        .window-content
+        {
+            input[type=submit] 
+            {
+                display: inline-block;                
+                margin-top: 0.5em;
+                float:left;
+            }
+        }
+    }
+}
+.add-entity-window,#add-book-window
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 85% !important;
+    max-width:700px;
+    padding-top:1em!important;
+    padding-left:0 !important;  
+    .window 
+    {
+        height: 450px !important;        
+        .window-content
+        {
+            padding-left:0!important;
+            overflow-y:auto;
+            form 
+            {            
+                text-align: center;
+                margin-top:1em;
+                .field-validation-error 
+                {
+                    
+                }
+
+                #add-entity-down-fields     
+                {
+                    width:80%;
+                    height:100%;
+                    display:inline-block;
+                    margin-top:0.5em;
+                    input[type=text]
+                    {
+                        width:40% !important;
+                        float:left !important;
+                        margin:1em;
+                    }
+                }
+
+                #Title
+                {
+                    margin-top:1em;
+                }
+            }
+
+            
+
+            .choose-photo 
+            {
+                width: 150px;
+                height: 150px;
+                margin: 1em;
+                margin-top: 0;
+                float: left;
+                display: inline-block;
+                background-size: 80% 80%;
+            }
+
+            input[type=text]
+            {
+                width: 50%;
+            }
+
+            input[type=submit] 
+            {
+                display: inline-block;                
+                margin-top: 0.5em;
+                float:left;
+            }
+        }
+    }
+}
+
+
+.raw-xml-switch
+{
+    float:left;
+    display:flex;
+    >*{display:inline-block;align-items:center;}
+    >h4{line-height:1.8em;padding-right: .5em;padding-left: .5em;}
+}
+
+
+
+
+
+
+
+
+
+
+.cssload-container * {
+	box-sizing: border-box;
+		-o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+}
+
+.cssload-container ul li{
+	list-style: none;
+}
+
+.cssload-flex-container {
+	display: flex;
+		display: -o-flex;
+		display: -ms-flex;
+		display: -webkit-flex;
+		display: -moz-flex;
+	flex-direction: row;
+		-o-flex-direction: row;
+		-ms-flex-direction: row;
+		-webkit-flex-direction: row;
+		-moz-flex-direction: row;
+	flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+	justify-content: space-around;
+}
+.cssload-flex-container li {
+	padding: 2px;
+	height: 22px;
+	width: 22px;
+	margin: 7px 4px;
+	position: relative;
+	text-align: center;
+}
+
+.cssload-loading {
+	display: inline-block;
+	position: relative;
+	width: 19px;
+	height: 19px;
+	border-radius: 100%;
+		-o-border-radius: 100%;
+		-ms-border-radius: 100%;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+	border: 1px solid transparent;
+	border-bottom: 1px solid rgb(0,145,234);
+	border-left: 1px solid rgb(0,145,234);
+	animation: cssload-spinR 2.3s linear infinite;
+		-o-animation: cssload-spinR 2.3s linear infinite;
+		-ms-animation: cssload-spinR 2.3s linear infinite;
+		-webkit-animation: cssload-spinR 2.3s linear infinite;
+		-moz-animation: cssload-spinR 2.3s linear infinite;
+}
+.cssload-loading:before, .cssload-loading:after {
+	content: '';
+	display: block;
+	border-radius: 100%;
+		-o-border-radius: 100%;
+		-ms-border-radius: 100%;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+	position: absolute;
+}
+.cssload-loading:before {
+	height: 11px;
+	width: 11px;
+	border: 1px solid transparent;
+	border-top: 1px solid rgba(255,0,0,0.66);
+	border-right: 1px solid rgba(50,194,27,0.65);
+	animation: cssload-spinL 0.86s linear infinite;
+		-o-animation: cssload-spinL 0.86s linear infinite;
+		-ms-animation: cssload-spinL 0.86s linear infinite;
+		-webkit-animation: cssload-spinL 0.86s linear infinite;
+		-moz-animation: cssload-spinL 0.86s linear infinite;
+	transform-origin: center center;
+		-o-transform-origin: center center;
+		-ms-transform-origin: center center;
+		-webkit-transform-origin: center center;
+		-moz-transform-origin: center center;
+	top: 11%;
+	left: 11%;
+}
+.cssload-loading:after {
+	height: 2px;
+	width: 2px;
+	background: transparent;
+	border: 0px solid rgb(255,245,56);
+	top: 35.5%;
+	left: 35.5%;
+}
+
+
+
+
+@keyframes cssload-spinR {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@-o-keyframes cssload-spinR {
+	from {
+		-o-transform: rotate(0deg);
+	}
+	to {
+		-o-transform: rotate(360deg);
+	}
+}
+
+@-ms-keyframes cssload-spinR {
+	from {
+		-ms-transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes cssload-spinR {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@-moz-keyframes cssload-spinR {
+	from {
+		-moz-transform: rotate(0deg);
+	}
+	to {
+		-moz-transform: rotate(360deg);
+	}
+}
+
+@keyframes cssload-spinL {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+@-o-keyframes cssload-spinL {
+	from {
+		-o-transform: rotate(0deg);
+	}
+	to {
+		-o-transform: rotate(-360deg);
+	}
+}
+
+@-ms-keyframes cssload-spinL {
+	from {
+		-ms-transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(-360deg);
+	}
+}
+
+@-webkit-keyframes cssload-spinL {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(-360deg);
+	}
+}
+
+@-moz-keyframes cssload-spinL {
+	from {
+		-moz-transform: rotate(0deg);
+	}
+	to {
+		-moz-transform: rotate(-360deg);
+	}
+
+}

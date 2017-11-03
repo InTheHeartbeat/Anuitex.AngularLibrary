@@ -1,0 +1,45 @@
+﻿
+<div class="windows-container" ng-controller="booksController">
+    <ul class="windows-grid" ng-repeat="book in Books">
+        <li class="window-wrapper">
+            <div class="window window-hovered-shadow">
+                <div class="window-header justify">
+                    <span class="icon ic-book"></span>
+                    <h4>{{book.Author}} - {{book.Title}}</h4>
+                    <div class="window-header-buttons" ng-show="!CurrentUser.IsAdmin">                        
+                        <span class="btn btn-icon" hg-click="delete({{book.Id}})">
+                            <span class="icon ic-remove"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <div class="entity-photo" style="background-image: url('{{book.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                    <span>Title:</span>
+                    <span>{{book.Title}}</span>
+                    <br />
+                    <span>Author:</span>
+                    <span>{{book.Author}}</span>
+                    <br />
+                    <span>Genre:</span>
+                    <span>{{book.Genre}}</span>
+                    <br />
+                    <span>Year:</span>
+                    <span>{{book.Year}}</span>
+                    <br />
+                    <span>Pages:</span>
+                    <span>{{book.Pages}}</span>
+                    <br />
+                    <span>Available:</span>
+                    <span>{{book.Amount}}</span>
+                    <br />
+                    <span>Price:</span>
+                    <span><b>{{book.Price}}</b></span>
+                    <a class="btn btn-icon btn-buy">
+                        <span class="icon ic-buy"></span>
+                    </a>
+                </div>
+            </div>
+        </li>  
+
+    </ul>
+</div>
