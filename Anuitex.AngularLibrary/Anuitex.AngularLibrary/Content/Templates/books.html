@@ -6,8 +6,8 @@
                 <div class="window-header justify">
                     <span class="icon ic-book"></span>
                     <h4>{{book.Author}} - {{book.Title}}</h4>
-                    <div class="window-header-buttons" ng-show="!CurrentUser.IsAdmin">                        
-                        <span class="btn btn-icon" hg-click="delete({{book.Id}})">
+                    <div class="window-header-buttons">                        
+                        <span class="btn btn-icon" hg-click="delete({{book.Id}})" ng-show="IsAdmin">
                             <span class="icon ic-remove"></span>
                         </span>
                     </div>

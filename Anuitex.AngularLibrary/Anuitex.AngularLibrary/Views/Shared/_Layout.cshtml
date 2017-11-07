@@ -7,12 +7,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>   
-<header class="header-bar" ng-controller="accountController">
+<body ng-controller="accountController">   
+<header class="header-bar" >
     
 
     <div class="header-title">
-        <h3>{{my.IsAuth}}</h3>
+        <h3>{{isSignInBtnDisabled}}</h3>
     </div>
     <div class="header-bar-menu-container">
         <ul id="header-bar-menu">
@@ -36,10 +36,14 @@
         </div>
         <div class="sidebar-items-container">
             <h4 class="label">Main</h4>
-           
+            <h4 class="label">Account</h4>
+            <ul class="section-selector">
+                <li ng-hide="IsAuth"><a href="#" ng-click="showSignInDialog()">Sign in</a></li>
+                <li ng-show="IsAuth"><a href="#" ng-click="showSignOutDialog()">Sign out</a></li>
+            </ul>
 
-            <h5>All rights reserved. <br>Tyner©@DateTime.Now.Year</h5>
-        </div>
+                <h5>All rights reserved. <br>Tyner©@DateTime.Now.Year</h5>
+</div>
     </div>
 
     <div class="body-content">       
@@ -52,3 +56,6 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+

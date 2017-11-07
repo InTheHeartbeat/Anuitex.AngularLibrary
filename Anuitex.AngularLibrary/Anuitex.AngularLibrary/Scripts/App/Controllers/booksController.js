@@ -1,12 +1,18 @@
-﻿booksModule.controller('booksController', function ($scope, booksService) {
+﻿booksModule.controller('booksController', function ($scope, sharedService, booksService) {
 
     $scope.IsEdit = false;
+    $scope.IsAdmin = false;    
 
     loadBooks();    
+
+    $scope.$watch(function () { return sharedService.CurrentUser; }, function (newValue, oldValue) {
+        if (newValue !== oldValue) $scope.IsAdmin = newValue.IsAdmin;        
+    });
+
     function loadBooks() {
         var books = booksService.get();
 
-        books.then(function(bk) { $scope.Books = bk.data }, function(err) { alert('failture loading Books ' + err); });
+        books.then(function (bk) { $scope.Books = bk.data; }, function (err) { alert('failture loading Books ' + err); });
     }
 
     $scope.save = function() {

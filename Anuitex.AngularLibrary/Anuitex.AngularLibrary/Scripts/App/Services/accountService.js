@@ -7,12 +7,17 @@
 
     this.trySignIn = function(login, password) {
         loginData.login = login;
-        loginData.password = password;
+        loginData.password = password;       
         var request = $http({
             method: 'post',
             url: "api/Account/TrySignIn",
             data: loginData
         });
+        return request;
+    }
+
+    this.signOut = function() {
+        var request = $http.get('api/Account/SignOut');
         return request;
     }
 });

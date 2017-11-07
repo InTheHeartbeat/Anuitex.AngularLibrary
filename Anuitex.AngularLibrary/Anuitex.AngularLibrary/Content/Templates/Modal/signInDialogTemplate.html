@@ -6,8 +6,8 @@
         <h3>Password</h3>
         <input type="password" placeholder="your password" name="password" ng-model="password" required />
         <div class="buttons">
-            <input type="button" class="btn btn-colored" value="Sign up" ng-click="signUp()">
-            <input type="submit" class="btn" value="Let me in!" ng-click="trySignIn(login,password)" ng-disabled="loginForm.$invalid">
+            <input type="button" class="btn" value="Sign up" ng-click="signUp()">
+            <input type="submit" id="signInBtn" class="btn btn-colored" value="Let me in!" ng-click="trySignIn(login,password) && isSignInBtnDisabled=false" ng-disabled="loginForm.$invalid || isSignInBtnDisabled">
         </div>
     </form>
 </div>
