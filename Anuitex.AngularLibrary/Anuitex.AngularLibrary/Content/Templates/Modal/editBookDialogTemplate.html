@@ -24,8 +24,8 @@
         <input type="text" name="path" id="path" style="display: none" ng-model="Current.PhotoPath"/>
         <input type="number" name="photoid" id="photo-id" style="display: none" ng-model="Current.PhotoId"/>
         
-        <input type="submit" id="addBookBtn" class="btn btn-colored" value="Complete" ng-click="tryAddBook(Current)" ng-disabled="loginForm.$invalid" ng-show="!IsEdit">
-        <input type="submit" id="editBookBtn" class="btn btn-colored" value="Complete" ng-click="tryEditBook(Current)" ng-disabled="loginForm.$invalid" ng-show="IsEdit">
+        <input type="submit" id="addBookBtn" class="btn btn-colored" value="Complete" ng-click="tryAddBook(Current)" ng-disabled="loginForm.$invalid" ng-hide="Current.IsEdit">
+        <input type="submit" id="editBookBtn" class="btn btn-colored" value="Complete" ng-click="tryEditBook(Current)" ng-disabled="loginForm.$invalid" ng-show="Current.IsEdit">
     </form>
 </div>
 <script type="text/javascript">
