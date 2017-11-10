@@ -17,17 +17,17 @@ namespace Anuitex.AngularLibrary.Controllers.API
     {
 
         [Route("api/Account/GetCurrentUser")]
-        [ResponseType(typeof(AccountModel))]
+        [ResponseType(typeof(AuthModel))]
         [HttpGet]
-        public AccountModel GetCurrentUser()
+        public AuthModel GetCurrentUser()
         {            
             if (CurrentUser == null && CurrentVisitor != null)
             {
-                return new AccountModel() {IsVisitor = true,Token = CurrentVisitor.Token.ToString(), IsAdmin = false};
+                return new AuthModel() {IsVisitor = true,Token = CurrentVisitor.Token.ToString(), IsAdmin = false};
             }
             if (CurrentUser != null)
             {
-                return new AccountModel() {IsAdmin = CurrentUser.IsAdmin, IsVisitor = false, Name = CurrentUser.Login, Token = CurrentUser.AccountAccessRecords.First().Token.ToString()};
+                return new AuthModel() {IsAdmin = CurrentUser.IsAdmin, IsVisitor = false, Name = CurrentUser.Login, Token = CurrentUser.AccountAccessRecords.First().Token.ToString()};
             }
 
             if (CurrentVisitor == null && CurrentUser == null)
@@ -43,22 +43,22 @@ namespace Anuitex.AngularLibrary.Controllers.API
                 DataContext.Visitors.InsertOnSubmit(visitor);
                 DataContext.SubmitChanges();
 
-                return new AccountModel(){IsVisitor = true,Token = token.ToString()};               
+                return new AuthModel(){IsVisitor = true,Token = token.ToString()};               
             }
             return null;
         }
 
         [Route("api/Account/TrySignIn")]
-        [ResponseType(typeof(AccountModel))]
+        [ResponseType(typeof(AuthModel))]
         [HttpPost]
-        public AccountModel TrySignIn(LoginData data)
+        public AuthModel TrySignIn(LoginData data)
         {                        
              Account account = DataContext.Accounts.FirstOrDefault(
                 ac => ac.Login == data.login && ac.Hash == data.password.MD5());
 
             if (account == null)
             {
-                return null;
+                return new AuthModel(){Message = "Login or password incorrect"};
             }
 
             Guid token = Guid.NewGuid();
@@ -81,7 +81,7 @@ namespace Anuitex.AngularLibrary.Controllers.API
             DataContext.AccountAccessRecords.InsertOnSubmit(record);
             DataContext.SubmitChanges();
 
-            return new AccountModel() {IsAdmin = account.IsAdmin, Name = account.Login, Token = token.ToString(),IsVisitor = false};
+            return new AuthModel() {IsAdmin = account.IsAdmin, Name = account.Login, Token = token.ToString(),IsVisitor = false};
         }
 
         [Route("api/Account/SignOut")]
@@ -104,6 +104,30 @@ namespace Anuitex.AngularLibrary.Controllers.API
             }
 
             return Ok();
+        }
+
+        [Route("api/Account/TrySignUp")]
+        [ResponseType(typeof(AuthModel))]
+        [HttpPost]
+        public AuthModel TrySignUp(LoginData data)
+        {
+            AuthModel model = new AuthModel();
+            if (DataContext.Accounts.Any(ac => ac.Login == data.login))
+            {
+                model.Message = "Login already exist";
+                return model;
+            }
+
+            Account newAccount = new Account()
+            {
+                Login = data.login,
+                Hash = data.password.MD5()
+            };
+
+            DataContext.Accounts.InsertOnSubmit(newAccount);
+            DataContext.SubmitChanges();
+
+            return TrySignIn(data);
         }
     }
 

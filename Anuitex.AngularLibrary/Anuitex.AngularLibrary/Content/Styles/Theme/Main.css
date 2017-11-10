@@ -284,9 +284,10 @@ b {
 }
 .nav-sector-controls {
   display: block;
-  position: absolute;
-  top: 1.5em;
-  right: 5em;
+  margin: 1em;
+  float: right;
+  width: 100%;
+  text-align: right;
 }
 /* ----- Navigation -----*/
 .navigation {

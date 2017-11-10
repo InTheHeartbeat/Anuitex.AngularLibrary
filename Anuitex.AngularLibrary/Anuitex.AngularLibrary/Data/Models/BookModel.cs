@@ -13,7 +13,7 @@ namespace Anuitex.AngularLibrary.Data.Models
         public int Amount { get; set; }
         public double Price { get; set; }        
         public string PhotoPath { get; set; }
-        public int? PhotoId { get; set; }        
+        public int PhotoId { get; set; }        
         public BookModel(Book baseBook)
         {
             Id = baseBook.Id;
@@ -25,7 +25,7 @@ namespace Anuitex.AngularLibrary.Data.Models
             Amount = baseBook.Amount;
             Price = baseBook.Price;            
             PhotoPath = baseBook.Image?.Path;
-            PhotoId = baseBook.PhotoId;
+            if (baseBook.PhotoId != null) PhotoId = (int) baseBook.PhotoId;
         }
 
         public BookModel()

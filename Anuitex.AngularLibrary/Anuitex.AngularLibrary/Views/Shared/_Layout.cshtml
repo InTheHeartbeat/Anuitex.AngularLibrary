@@ -12,7 +12,7 @@
     
 
     <div class="header-title">
-        <h3>{{isSignInBtnDisabled}}</h3>
+        <h3>{{Message}}</h3>
     </div>
     <div class="header-bar-menu-container">
         <ul id="header-bar-menu">
@@ -39,6 +39,7 @@
             <h4 class="label">Account</h4>
             <ul class="section-selector">
                 <li ng-hide="IsAuth"><a href="#" ng-click="showSignInDialog()">Sign in</a></li>
+                <li ng-hide="IsAuth"><a href="#" ng-click="showSignUpDialog()">Sign up</a></li>
                 <li ng-show="IsAuth"><a href="#" ng-click="showSignOutDialog()">Sign out</a></li>
             </ul>
 

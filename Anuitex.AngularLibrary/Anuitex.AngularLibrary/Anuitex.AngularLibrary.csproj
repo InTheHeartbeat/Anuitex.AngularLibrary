@@ -166,7 +166,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Library.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Models\AccountModel.cs" />
+    <Compile Include="Data\Models\AuthModel.cs" />
     <Compile Include="Data\Models\BookModel.cs" />
     <Compile Include="Data\Models\JournalModel.cs" />
     <Compile Include="Data\Models\NewspaperModel.cs" />
@@ -244,8 +244,10 @@
     <Content Include="Content\Styles\ngDialog-theme-plain.min.css" />
     <Content Include="Content\Styles\ngDialog.min.css" />
     <Content Include="Content\Styles\select2.css" />
+    <Content Include="Content\Templates\Modal\editBookDialogTemplate.html" />
+    <Content Include="Content\Templates\Modal\signInDialogTempl.html" />
     <Content Include="Content\Templates\Modal\signOutDialogTemplate.html" />
-    <Content Include="Content\Templates\Modal\signInDialogTemplate.html" />
+    <Content Include="Content\Templates\Modal\signUpDialogTemplate.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1096,6 +1098,7 @@
     <Content Include="Upload\Images\ead71db9-77cd-4bc7-944d-996859606112.jpg" />
     <Content Include="Upload\Images\f48c67a4-8ce1-4d06-b847-41ea5d70f635.jpg" />
     <Content Include="Upload\Images\f5e77bbc-01d0-4945-b465-79d876aa969d.jpg" />
+    <Content Include="Upload\Images\no-photo-e.png" />
     <Content Include="Upload\Images\no-photo.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

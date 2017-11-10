@@ -4,6 +4,8 @@
     $scope.CurrentUser = null;
     $scope.isSignInBtnDisabled = false;
 
+    $scope.Message = "";
+
     loadCurrentUser();
 
     function loadCurrentUser() {
@@ -32,24 +34,27 @@
     $scope.showSignInDialog = function () {        
         ngDialog.open({
             name: 'signInDialog',
-            template: 'Content/Templates/Modal/signInDialogTemplate.html',
+            template: 'Content/Templates/Modal/signInDialogTempl.html',
             className: 'ngdialog-theme-flat ngdialog-theme-custom',
             scope: $scope
         });       
     }
 
     $scope.trySignIn = function(login, password) {
-        //$scope.isSignInBtnDisabled = true;
+        $scope.isSignInBtnDisabled = true;
         var post = accountService.trySignIn(login, password);
         post.then(function(response) {
-                
-                if (response.data.IsVisitor === false) {
-                    setCookie("VToken", "", -1);
-                    setCookie("AToken", response.data.Token, 1);
+                $scope.Message = response.data.Message;               
+                if ($scope.Message === null) {
+                    if (response.data.IsVisitor === false) {
+                        setCookie("VToken", "", -1);
+                        setCookie("AToken", response.data.Token, 1);
+                    }
+                    ngDialog.close('signInDialog');
+                    loadCurrentUser();
                 }
-                ngDialog.close('signInDialog');
-                loadCurrentUser();
-            },
+                $scope.isSignInBtnDisabled = false;
+        },
             function(err) { alert(err.statusText); });
     };
 
@@ -62,14 +67,36 @@
         });
     };
 
-    $scope.signOut = function () {        
+    $scope.signOut = function() {
         var request = accountService.signOut();
-        request.then(function (responce) { setCookie("AToken", "", -1);
-            loadCurrentUser();
-            ngDialog.close('signOutDialog');
-        }, function (err) { alert(err.statusText); });
-        
-    }
+        request.then(function(responce) {
+                setCookie("AToken", "", -1);
+                loadCurrentUser();
+                ngDialog.close('signOutDialog');
+            },
+            function(err) { alert(err.statusText); });
+    };
+
+    $scope.showSignUpDialog = function() {
+        ngDialog.open({
+            name: 'signUpDialog',
+            template: 'Content/Templates/Modal/signUpDialogTemplate.html',
+            className: 'ngdialog-theme-flat ngdialog-theme-custom',
+            scope: $scope
+        });
+    };
+
+    $scope.trySignUp = function(login, password) {        
+        var post = accountService.trySignUp(login, password);
+        post.then(function (response) {
+                $scope.Message = response.data.Message;
+                if ($scope.Message === null) {
+                    $scope.trySignIn(login, password);
+                    ngDialog.close('signUpDialog');                    
+                }                
+            },
+            function (err) { alert(err.statusText); });
+    };
 
     function setCookie(cname, cvalue, exdays) {
         var d = new Date();

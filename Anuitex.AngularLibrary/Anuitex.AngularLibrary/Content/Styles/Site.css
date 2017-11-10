@@ -284,9 +284,10 @@ b {
 }
 .nav-sector-controls {
   display: block;
-  position: absolute;
-  top: 1.5em;
-  right: 5em;
+  margin: 1em;
+  float: right;
+  width: 100%;
+  text-align: right;
 }
 /* ----- Navigation -----*/
 .navigation {
@@ -783,6 +784,14 @@ body {
 }
 #index-container {
   position: absolute;
+}
+.choose-photo {
+  height: 200px;
+  margin-bottom: 1em;
+}
+.ngdialog-content {
+  height: 100%;
+  overflow-y: auto;
 }
 .btn-submit {
   padding: 0;

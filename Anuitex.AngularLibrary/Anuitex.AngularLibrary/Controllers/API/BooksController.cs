@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
-using System.Web.Mvc;
 using Anuitex.AngularLibrary.Data;
 using Anuitex.AngularLibrary.Data.Models;
-using Anuitex.AngularLibrary.Models;
+using Anuitex.AngularLibrary.Extensions;
 
 namespace Anuitex.AngularLibrary.Controllers.API
 {
@@ -22,7 +24,7 @@ namespace Anuitex.AngularLibrary.Controllers.API
         }
 
         [ResponseType(typeof(BookModel))]
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public IHttpActionResult AddBook(BookModel book)
         {
             if (!ModelState.IsValid){return BadRequest(ModelState);}
@@ -45,7 +47,7 @@ namespace Anuitex.AngularLibrary.Controllers.API
         }
 
         [ResponseType(typeof(void))]
-        [System.Web.Mvc.HttpPut]
+        [HttpPut]
         public IHttpActionResult EditBook(BookModel bookModel)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
@@ -69,7 +71,7 @@ namespace Anuitex.AngularLibrary.Controllers.API
             return Ok();
         }
         
-        [System.Web.Mvc.HttpDelete]
+        [HttpDelete]
         public IHttpActionResult DeleteBook(int id)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
@@ -84,5 +86,40 @@ namespace Anuitex.AngularLibrary.Controllers.API
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("api/Books/LoadImage")]
+        public async Task<IHttpActionResult> LoadImage()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return BadRequest();
+            }
+
+            MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+
+            string relPath = "/Upload/Images/";
+            string root = System.Web.HttpContext.Current.Server.MapPath("~/" + relPath);
+            int id = -1;
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+            foreach (HttpContent content in provider.Contents)
+            {
+                string fileName = content.Headers.ContentDisposition.FileName.Trim('\"');
+                string customFileName = Guid.NewGuid().ToString() + new FileInfo(fileName).Extension;
+                byte[] fileBytes = await content.ReadAsByteArrayAsync();
+
+                using (FileStream fs = new FileStream(root + customFileName, FileMode.Create))
+                {
+                    await fs.WriteAsync(fileBytes, 0, fileBytes.Length);
+                }
+                DataContext.Images.InsertOnSubmit(new Image() { Path = relPath + customFileName });
+                DataContext.SubmitChanges();
+                id = DataContext.Images.FirstOrDefault(img => img.Path == relPath + customFileName).Id;
+            }
+
+            return Ok(id);
+        }
+
     }
 }

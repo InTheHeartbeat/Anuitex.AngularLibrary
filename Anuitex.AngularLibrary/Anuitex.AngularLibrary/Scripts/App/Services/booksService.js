@@ -12,11 +12,11 @@
         return $http.get('api/Books');
     }
 
-    this.put = function(Book) {
+    this.put = function(book) {
         var request = $http({
             method: 'put',
             url: 'api/Books',
-            data: Book
+            data: book
         });
         return request;
     }
