@@ -160,6 +160,9 @@
     <Compile Include="Controllers\API\AccountController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\BooksController.cs" />
+    <Compile Include="Controllers\API\JournalsController.cs" />
+    <Compile Include="Controllers\API\NewspapersController.cs" />
+    <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Library.designer.cs">
       <AutoGen>True</AutoGen>
@@ -238,12 +241,16 @@
     <Content Include="Content\Styles\Theme\Variables.min.css">
       <DependentUpon>Variables.css</DependentUpon>
     </Content>
+    <Content Include="Content\Templates\newspapers.html" />
+    <Content Include="Content\Templates\journals.html" />
     <Content Include="Content\Templates\books.html" />
     <Content Include="Content\Images\Backgrounds\DefaultProjectPhoto.png" />
     <Content Include="Content\Images\Backgrounds\MainBackground.jpg" />
     <Content Include="Content\Styles\ngDialog-theme-plain.min.css" />
     <Content Include="Content\Styles\ngDialog.min.css" />
     <Content Include="Content\Styles\select2.css" />
+    <Content Include="Content\Templates\Modal\editJournalDialogTemplate - Copy.html" />
+    <Content Include="Content\Templates\Modal\editNewspaperDialogTemplate.html" />
     <Content Include="Content\Templates\Modal\editBookDialogTemplate.html" />
     <Content Include="Content\Templates\Modal\signInDialogTempl.html" />
     <Content Include="Content\Templates\Modal\signOutDialogTemplate.html" />
@@ -283,10 +290,14 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\accountController.js" />
+    <Content Include="Scripts\App\Controllers\newspapersController.js" />
+    <Content Include="Scripts\App\Controllers\journalsController.js" />
     <Content Include="Scripts\App\Controllers\booksController.js" />
     <Content Include="Scripts\App\directives.js" />
     <Content Include="Scripts\App\modules.js" />
     <Content Include="Scripts\App\Services\accountService.js" />
+    <Content Include="Scripts\App\Services\newspapersService.js" />
+    <Content Include="Scripts\App\Services\journalsService.js" />
     <Content Include="Scripts\App\Services\booksService.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />

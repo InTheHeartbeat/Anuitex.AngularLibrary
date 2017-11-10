@@ -3,11 +3,11 @@
     <h2>Sign up</h2>
     <form name="signUpForm">
         <h3>Login</h3>
-        <input type="text" placeholder="your login" name="login" ng-model="login" required />
+        <input type="text" placeholder="your login" name="login" ng-model="login" required ng-minlength="5" />
         <h3>Password</h3>
-        <input type="password" placeholder="your password" name="password" ng-model="password" required />
+        <input type="password" placeholder="your password" name="password" ng-model="password" required ng-minlength="5" />
         <div class="buttons">            
-            <input type="submit" id="signUpBtn" class="btn btn-colored" value="Let me in!" ng-click="trySignUp(login,password)" ng-disabled="loginForm.$invalid">
+            <input type="submit" id="signUpBtn" class="btn btn-colored" value="Let me in!" ng-click="trySignUp(login,password)" ng-disabled="signUpForm.$invalid">
         </div>
         <h5 style="color: red; display: block; margin: 5px; margin-top: 70px;">{{Message}}</h5>
     </form>

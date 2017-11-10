@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace Anuitex.AngularLibrary.Data.Models
-{
-    [Serializable]
+{   
     public class JournalModel
     {
         public int Id { get; set; }

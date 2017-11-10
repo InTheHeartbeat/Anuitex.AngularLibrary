@@ -1,0 +1,95 @@
+﻿<div class="ngdialog-message">
+    <h2 ng-show="Current.IsEdit">Edit journal</h2>
+    <h2 ng-show="!Current.IsEdit">Create journal</h2>
+    <form name="journalForm">
+        <div class="choose-photo" id="journal-photo">
+            <h5>Click for choose photo</h5>
+        </div>
+        <label>Title</label>
+        <input type="text" placeholder="Title" name="title" ng-model="Current.Title" required/>
+        <label>Date</label>
+        <input type="text" placeholder="Author" name="author" ng-model="Current.Date" required/>
+        <label>Periodicity</label>
+        <input type="text" placeholder="Genre" name="genre" ng-model="Current.Periodicity" required/>
+        <br />                
+        <label>Subjects</label>
+        <input type="text" placeholder="Year" name="year" ng-model="Current.Subjects" required />        
+        <label>Amount</label>
+        <input type="text" placeholder="Amount" name="amount" ng-model="Current.Amount" required />                                 
+        <label>Price</label>
+        <input type="text" placeholder="Price" name="price" ng-model="Current.Price" required />                   
+        <input type="file" name="upload" id="uploadFile" style="display: none" />
+        <input type="text" name="path" id="path" style="display: none" ng-model="Current.PhotoPath"/>
+        <input type="number" name="photoid" id="photo-id" style="display: none" ng-model="Current.PhotoId"/>
+        
+        <input type="submit" id="addJournalBtn" class="btn btn-colored" value="Complete" ng-click="tryAddJournal(Current)" ng-disabled="journalForm.$invalid" ng-hide="Current.IsEdit">
+        <input type="submit" id="editJournalBtn" class="btn btn-colored" value="Complete" ng-click="tryEditJournal(Current)" ng-disabled="journalForm.$invalid" ng-show="Current.IsEdit">
+    </form>
+</div>
+<script type="text/javascript">
+
+    
+
+    $("#journal-photo").click(
+        function () {
+            $("#uploadFile").trigger('click');
+        });
+
+
+    $(".ngdialog-message").ready(function () {        
+       // $("#Price").rules("remove", "number");
+
+        var path = "/Upload/Images/no-photo-e.png";
+        var ipath = $('#path').val();
+        if (ipath) {
+            path = ipath;
+        }
+
+        
+        $('#journal-photo').css('background-image', 'url(' + path + ')').css('background-size', 'contain');
+        
+        if ($("#Year").val() === "0"){ $("#Year").val("");}
+        if ($("#Pages").val() === 0){ $("#Pages").val("");}
+        if ($("#Amount").val()==="0") { $("#Amount").val("") };
+        if($("#Price").val()==="0"){$("#Price").val("");}
+
+        $("#uploadFile").change(function (e) {
+            e.preventDefault();
+            var files = document.getElementById('uploadFile').files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        $('#journal-photo').css('background-image', 'url(' + reader.result + ')')
+                            .css('background-size', 'contain');
+                    }
+                    if (files[0]) {
+                        reader.readAsDataURL(files[0]);
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url:'api/Upload/LoadImage',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (dat) {                            
+                            $("#photo-id").val(dat).trigger('input');
+                            alert($("#photo-id").val());
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert("Браузер не поддерживает загрузку файлов HTML5!");
+                }
+            }
+        });
+    });
+</script>                             

@@ -1,0 +1,59 @@
+﻿<div ng-controller="journalsController">
+    <div class="nav-sector-controls" ng-show="IsAdmin">
+        <div class="btn btn-icon" id="btn-import-journals">
+            <span class="icon ic-import"></span>
+        </div>
+        <input id="btn-import-journals-file" type="file" name="upload" style="display: none">
+
+        <a class="btn btn-icon" href="#">
+            <span class="icon ic-export"></span>
+        </a>
+        <a class="btn btn-icon" href="#" ng-click="showAddJournalDialog()">
+            <span class="icon ic-add"></span>
+        </a>
+    </div>
+
+    <div class="windows-container entities-container">        
+        <ul class="windows-grid" ng-repeat="journal in Journals">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-journal"></span>
+                        <h4>{{journal.Title}} - {{journal.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <span class="btn btn-icon" ng-click="showEditJournalDialog(journal)" ng-show="IsAdmin">
+                                <span class="icon ic-edit"></span>
+                            </span>
+                            <span class="btn btn-icon" ng-click="delete(journal.Id)" ng-show="IsAdmin">
+                                <span class="icon ic-remove"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{journal.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{journal.Title}}</span>
+                        <br/>
+                        <span>Date:</span>
+                        <span>{{journal.Date}}</span>
+                        <br/>
+                        <span>Periodicity:</span>
+                        <span>{{journal.Periodicity}}</span>
+                        <br/>
+                        <span>Subjects:</span>
+                        <span>{{journal.Subjects}}</span>
+                        <br/>
+                        <span>Available:</span>
+                        <span>{{journal.Amount}}</span>
+                        <br/>
+                        <span>Price:</span>
+                        <span><b>{{journal.Price}}</b></span>
+                        <a class="btn btn-icon btn-buy">
+                            <span class="icon ic-buy"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

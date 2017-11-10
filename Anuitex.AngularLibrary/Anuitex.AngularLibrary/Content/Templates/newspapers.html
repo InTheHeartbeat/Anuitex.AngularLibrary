@@ -1,0 +1,56 @@
+﻿<div ng-controller="newspapersController">
+    <div class="nav-sector-controls" ng-show="IsAdmin">
+        <div class="btn btn-icon" id="btn-import-newspapers">
+            <span class="icon ic-import"></span>
+        </div>
+        <input id="btn-import-newspapers-file" type="file" name="upload" style="display: none">
+
+        <a class="btn btn-icon" href="#">
+            <span class="icon ic-export"></span>
+        </a>
+        <a class="btn btn-icon" href="#" ng-click="showAddNewspaperDialog()">
+            <span class="icon ic-add"></span>
+        </a>
+    </div>
+
+    <div class="windows-container entities-container">        
+        <ul class="windows-grid" ng-repeat="newspaper in Newspapers">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-newspaper"></span>
+                        <h4>{{newspaper.Title}} - {{newspaper.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <span class="btn btn-icon" ng-click="showEditNewspaperDialog(newspaper)" ng-show="IsAdmin">
+                                <span class="icon ic-edit"></span>
+                            </span>
+                            <span class="btn btn-icon" ng-click="delete(newspaper.Id)" ng-show="IsAdmin">
+                                <span class="icon ic-remove"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{newspaper.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{newspaper.Title}}</span>
+                        <br/>
+                        <span>Date:</span>
+                        <span>{{newspaper.Date}}</span>
+                        <br/>
+                        <span>Periodicity:</span>
+                        <span>{{newspaper.Periodicity}}</span>                                               
+                        <br/>
+                        <span>Available:</span>
+                        <span>{{newspaper.Amount}}</span>
+                        <br/>
+                        <span>Price:</span>
+                        <span><b>{{newspaper.Price}}</b></span>
+                        <a class="btn btn-icon btn-buy">
+                            <span class="icon ic-buy"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

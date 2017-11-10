@@ -3,9 +3,9 @@
     <h2>Sign in</h2>
     <form name="loginForm">
         <h3>Login</h3>
-        <input type="text" placeholder="your login" name="login" ng-model="login" required />
+        <input type="text" placeholder="your login" name="login" ng-model="login" required ng-minlength="5" />
         <h3>Password</h3>
-        <input type="password" placeholder="your password" name="password" ng-model="password" required />
+        <input type="password" placeholder="your password" name="password" ng-model="password" required ng-minlength="5" />
         <div class="buttons">
             <input type="button" class="btn" value="Sign up" ng-click="showSignUpDialog()">
             <input type="submit" id="signInBtn" class="btn btn-colored" value="Let me in!" ng-click="trySignIn(login,password)" ng-disabled="loginForm.$invalid || isSignInBtnDisabled">

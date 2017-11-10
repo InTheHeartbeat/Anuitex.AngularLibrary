@@ -1,8 +1,10 @@
 ﻿var libraryModule;
 
 var booksModule;
-var accountModule;
+var journalsModule;
+var newspapersModule;
 
+var accountModule;
 var sharedModule;
 
 (function () {
@@ -17,5 +19,16 @@ var sharedModule;
 
     accountModule = angular.module('accountModule', ['sharedModule']);
     booksModule = angular.module('booksModule', ['sharedModule']);
-    libraryModule = angular.module('libraryModule', ['booksModule', 'accountModule', 'ngDialog']);    
+    journalsModule = angular.module('journalsModule', ['sharedModule']);
+    newspapersModule = angular.module('newspapersModule', ['sharedModule']);
+    libraryModule = angular.module('libraryModule', ['booksModule', 'journalsModule', 'newspapersModule', 'accountModule', 'ngDialog']);
+
+    libraryModule.controller('navController', function($scope) {
+        $scope.NavModes = ["Books", "Journals", "Newspapers"];
+        $scope.CurrentNav = $scope.NavModes[0];
+        $scope.applyNav = function(nav) {
+            $scope.CurrentNav = nav;
+        }
+    });
+
 })();
