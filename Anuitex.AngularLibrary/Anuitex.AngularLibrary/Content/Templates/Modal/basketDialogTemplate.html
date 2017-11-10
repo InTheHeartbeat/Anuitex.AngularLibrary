@@ -1,0 +1,46 @@
+﻿<div class="ngdialog-message">
+    <h2>Basket</h2>
+    <table style="width: 100%; margin-top: 0;">
+        <tr>
+            <td><h4>Order id: {{Basket.OrderId}}</h4></td>
+            <td><h4>Total: {{Basket.TotalProductsCount}}</h4></td>
+            <td><h4>Sum: {{Basket.SumPrice}}uan</h4></td>
+        </tr>
+    </table>
+    <ul>
+        <li ng-repeat="book in Basket.BookProducts" class="basket-li">
+            <table style="width: 100%; margin-top: 0;" class="products-table">
+                <tr>
+                    <td><img src="{{book.PhotoPath}}" width="50px" height="50px"/></td>
+                    <td><h4>{{book.Author}} - {{book.Title}}</h4></td>
+                    <td><h4>{{book.Price}}uah</h4></td>
+                    <td><h4><a href="#" ng-click="removeFromBasket(book.Id,'Book')">Delete</a></h4></td>
+                </tr>
+            </table>
+        </li>
+        
+        <li ng-repeat="journal in Basket.JournalProducts" class="basket-li">
+            <table style="width: 100%; margin-top: 0;" class="products-table">
+                <tr>
+                    <td><img src="{{journal.PhotoPath}}" width="50px" height="50px" /></td>
+                    <td><h4>{{journal.Title}} - {{journal.Subjects}}</h4></td>
+                    <td><h4>{{journal.Price}}uah</h4></td>
+                    <td><h4><a href="#" ng-click="removeFromBasket(journal.Id,'Journal')">Delete</a></h4></td>
+                </tr>
+            </table>
+        </li>
+        
+        <li ng-repeat="newspaper in Basket.NewspaperProducts" class="basket-li">
+            <table style="width: 100%; margin-top: 0;" class="products-table">
+                <tr>
+                    <td><img src="{{newspaper.PhotoPath}}" width="50px" height="50px" /></td>
+                    <td><h4>{{newspaper.Author}} - {{newspaper.Title}}</h4></td>
+                    <td><h4>{{newspaper.Price}}uan</h4></td>
+                    <td><h4><a href="#" ng-click="removeFromBasket(newspaper.Id,'Newspaper')">Delete</a></h4></td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+    
+    <input type="button" class="btn btn-colored" value="Apply" ng-click="applyBasket(Basket.OrderId)">
+</div>

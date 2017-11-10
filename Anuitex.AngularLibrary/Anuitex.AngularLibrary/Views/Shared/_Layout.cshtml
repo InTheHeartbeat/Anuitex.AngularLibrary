@@ -9,54 +9,61 @@
 </head>
 <body ng-controller="accountController">
 <div class="wrapper" ng-controller="navController">
-<header class="header-bar">
-    <div class="header-title">
-        <h3>{{Message}}</h3>
-    </div>
-    <div class="header-bar-menu-container">
-        <ul id="header-bar-menu">
-            <li ng-hide="IsAuth">
-                <h3 ng-click="showSignInDialog()"><a href="#">Sign in</a>
-                </h3>
-            </li>
-            <li ng-show="IsAuth">
-                <h3>Hello, {{CurrentUser.Name}}!</h3>
-            </li>
-        </ul>
-    </div>
-</header>
+    <div class="sellWrapper" ng-controller="sellController">
+            
+        <header class="header-bar">
+            <div class="header-title">
+                <h3>{{Message}}</h3>
+            </div>
+            <div class="header-bar-menu-container">
+                <ul id="header-bar-menu">
+                    <li ng-hide="IsAuth">
+                        <h3 ng-click="showSignInDialog()"><a href="#">Sign in</a>
+                        </h3>
+                    </li>
+                    <li ng-show="IsAuth">
+                        <h3>Hello, {{CurrentUser.Name}}!</h3>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
-<div class="sidebar">
-    <div class="sidebar-header">
-        <span class="company">Anuitex</span>
-        <div class="sub-header">
-            <span class="title">Library</span>
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span class="company">Anuitex</span>
+                <div class="sub-header">
+                    <span class="title">Library</span>
+                </div>
+            </div>
+            <div class="sidebar-items-container">
+                <h4 class="label">Main</h4>
+                <ul class="section-selector">
+                    <li ng-repeat="nav in NavModes" ng-class="{'active':nav===CurrentNav}" ng-click="applyNav(nav)"><a href="#">{{nav}}</a></li>
+                </ul>
+                <h4 class="label">Sell</h4>
+                <ul class="section-selector">
+                    <li><a href="#" ng-click="showBasket()">Basket ({{Basket.TotalProductsCount}})</a></li>
+                </ul>
+                <h4 class="label">Account</h4>
+                <ul class="section-selector">
+                    <li ng-hide="IsAuth"><a href="#" ng-click="showSignInDialog()">Sign in</a></li>
+                    <li ng-hide="IsAuth"><a href="#" ng-click="showSignUpDialog()">Sign up</a></li>
+                    <li ng-show="IsAuth"><a href="#" ng-click="showSignOutDialog()">Sign out</a></li>
+                </ul>
+
+                <h5>All rights reserved. <br>Tyner©@DateTime.Now.Year</h5>
+            </div>
         </div>
+
+        <div class="body-content">
+            @RenderBody()
+        </div>
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/app")
+        @RenderSection("scripts", required: false)
     </div>
-    <div class="sidebar-items-container">
-        <h4 class="label">Main</h4>
-        <ul class="section-selector">
-            <li ng-repeat="nav in NavModes" ng-class="{'active':nav===CurrentNav}" ng-click="applyNav(nav)"><a href="#">{{nav}}</a></li>
-        </ul>
-        <h4 class="label">Account</h4>
-        <ul class="section-selector">
-            <li ng-hide="IsAuth"><a href="#" ng-click="showSignInDialog()">Sign in</a></li>
-            <li ng-hide="IsAuth"><a href="#" ng-click="showSignUpDialog()">Sign up</a></li>
-            <li ng-show="IsAuth"><a href="#" ng-click="showSignOutDialog()">Sign out</a></li>
-        </ul>
-
-        <h5>All rights reserved. <br>Tyner©@DateTime.Now.Year</h5>
-    </div>
-</div>
-
-    <div class="body-content">
-        @RenderBody()
-    </div>
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/app")
-    @RenderSection("scripts", required: false)
 </div>
 </body>
 </html>

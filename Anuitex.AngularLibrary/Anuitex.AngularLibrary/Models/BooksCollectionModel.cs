@@ -6,7 +6,7 @@ using Anuitex.AngularLibrary.Data.Models;
 
 namespace Anuitex.AngularLibrary.Models
 {
-    public class BooksCollectionModel : BaseModel
+    public class BooksCollectionModel
     {
         public BookModel[] Books { get; set; }
     }

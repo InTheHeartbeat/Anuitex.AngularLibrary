@@ -162,6 +162,7 @@
     <Compile Include="Controllers\API\BooksController.cs" />
     <Compile Include="Controllers\API\JournalsController.cs" />
     <Compile Include="Controllers\API\NewspapersController.cs" />
+    <Compile Include="Controllers\API\SellController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Library.designer.cs">
@@ -169,15 +170,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Library.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Models\AcceptSellOrderModel.cs" />
     <Compile Include="Data\Models\AuthModel.cs" />
     <Compile Include="Data\Models\BookModel.cs" />
     <Compile Include="Data\Models\JournalModel.cs" />
     <Compile Include="Data\Models\NewspaperModel.cs" />
+    <Compile Include="Data\Models\RemoveProductFromBasketModel.cs" />
+    <Compile Include="Data\Models\SellProductModel.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BooksCollectionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,7 +253,7 @@
     <Content Include="Content\Styles\ngDialog-theme-plain.min.css" />
     <Content Include="Content\Styles\ngDialog.min.css" />
     <Content Include="Content\Styles\select2.css" />
-    <Content Include="Content\Templates\Modal\editJournalDialogTemplate - Copy.html" />
+    <Content Include="Content\Templates\Modal\basketDialogTemplate.html" />
     <Content Include="Content\Templates\Modal\editNewspaperDialogTemplate.html" />
     <Content Include="Content\Templates\Modal\editBookDialogTemplate.html" />
     <Content Include="Content\Templates\Modal\signInDialogTempl.html" />
@@ -290,12 +294,14 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\accountController.js" />
+    <Content Include="Scripts\App\Controllers\sellController.js" />
     <Content Include="Scripts\App\Controllers\newspapersController.js" />
     <Content Include="Scripts\App\Controllers\journalsController.js" />
     <Content Include="Scripts\App\Controllers\booksController.js" />
     <Content Include="Scripts\App\directives.js" />
     <Content Include="Scripts\App\modules.js" />
     <Content Include="Scripts\App\Services\accountService.js" />
+    <Content Include="Scripts\App\Services\sellService.js" />
     <Content Include="Scripts\App\Services\newspapersService.js" />
     <Content Include="Scripts\App\Services\journalsService.js" />
     <Content Include="Scripts\App\Services\booksService.js" />

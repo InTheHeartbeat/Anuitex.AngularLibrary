@@ -786,7 +786,8 @@ body {
 #index-container {
   position: absolute;
 }
-.wrapper {
+.wrapper,
+.sellWrapper {
   height: 100%;
 }
 .choose-photo {
@@ -796,6 +797,40 @@ body {
 .ng-dialog-form > .ngdialog-content {
   height: 100%;
   overflow-y: auto;
+}
+.ng-dialog-basket > .ngdialog-content {
+  width: 80% !important;
+  height: 100% !important;
+  overflow-y: auto;
+}
+.ng-dialog-basket > .ngdialog-content .products-table {
+  width: 100%;
+  table-layout: fixed;
+  text-align: center;
+}
+.ng-dialog-basket > .ngdialog-content .products-table tbody tr td:nth-child(1) {
+  width: 60px;
+}
+.ng-dialog-basket > .ngdialog-content .products-table tbody tr td:nth-child(2) {
+  width: 100%;
+}
+.ng-dialog-basket > .ngdialog-content .products-table tbody tr td:nth-child(3) {
+  width: 100%;
+}
+.ng-dialog-basket > .ngdialog-content .products-table tbody tr td:nth-child(4) {
+  width: 100%;
+  text-align: right !important;
+}
+.ng-dialog-basket > .ngdialog-content .products-table tbody tr td:nth-child(4) a {
+  color: red !important;
+}
+.basket-li {
+  list-style: none;
+  height: 75px;
+  border-bottom: solid 1px darkgray;
+}
+.basket-li > h4 {
+  margin: 0;
 }
 .btn-submit {
   padding: 0;
@@ -875,7 +910,7 @@ body {
   height: 190px !important;
 }
 .signin-window .window .window-content {
-  padding-top: 1em!important;
+  padding-top: 1em !important;
 }
 .signin-window :nth-last-child(2) {
   margin-bottom: 1em;
@@ -894,7 +929,7 @@ body {
   height: 230px !important;
 }
 .signup-window .window .window-content {
-  padding-top: 1em!important;
+  padding-top: 1em !important;
 }
 .signup-window :nth-last-child(2) {
   margin-bottom: 1em;
@@ -917,7 +952,7 @@ body {
   margin: 0 auto;
   width: 85% !important;
   max-width: 700px;
-  padding-top: 1em!important;
+  padding-top: 1em !important;
   padding-left: 0 !important;
 }
 .add-entity-window .window,
@@ -926,7 +961,7 @@ body {
 }
 .add-entity-window .window .window-content,
 #add-book-window .window .window-content {
-  padding-left: 0!important;
+  padding-left: 0 !important;
   overflow-y: auto;
 }
 .add-entity-window .window .window-content form,
