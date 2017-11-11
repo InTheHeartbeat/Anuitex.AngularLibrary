@@ -15,6 +15,11 @@
         books.then(function (bk) { $scope.Books = bk.data; }, function (err) { alert('failture loading Books ' + err); });
     }
 
+    $scope.export = function() {
+        console.log(sharedService.Nav);
+        sharedService.Nav.applyNav('ExportBooks');
+    }
+
     $scope.showEditBookDialog = function (book) {        
         $scope.Current = book;
         $scope.Current.IsEdit = true;

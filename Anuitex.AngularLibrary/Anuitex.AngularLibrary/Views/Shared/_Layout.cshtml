@@ -13,7 +13,7 @@
             
         <header class="header-bar">
             <div class="header-title">
-                <h3>{{Message}}</h3>
+                <h3>{{CurrentNav}}</h3>
             </div>
             <div class="header-bar-menu-container">
                 <ul id="header-bar-menu">
@@ -38,7 +38,7 @@
             <div class="sidebar-items-container">
                 <h4 class="label">Main</h4>
                 <ul class="section-selector">
-                    <li ng-repeat="nav in NavModes" ng-class="{'active':nav===CurrentNav}" ng-click="applyNav(nav)"><a href="#">{{nav}}</a></li>
+                    <li ng-repeat="section in LibSections" ng-class="{'active':section===CurrentNav}" ng-click="applyNav(section)"><a href="#">{{section}}</a></li>
                 </ul>
                 <h4 class="label">Sell</h4>
                 <ul class="section-selector">

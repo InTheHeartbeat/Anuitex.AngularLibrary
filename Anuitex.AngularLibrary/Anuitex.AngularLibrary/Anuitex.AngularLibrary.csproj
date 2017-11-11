@@ -160,6 +160,7 @@
     <Compile Include="Controllers\API\AccountController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\BooksController.cs" />
+    <Compile Include="Controllers\API\ExportController.cs" />
     <Compile Include="Controllers\API\JournalsController.cs" />
     <Compile Include="Controllers\API\NewspapersController.cs" />
     <Compile Include="Controllers\API\SellController.cs" />
@@ -181,8 +182,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExportHelper.cs" />
     <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BooksCollectionModel.cs" />
+    <Compile Include="Models\IO\Export\Books\ExportableBookModel.cs" />
+    <Compile Include="Models\IO\Export\Books\ExportBooksModel.cs" />
+    <Compile Include="Models\IO\Export\Journals\ExportableJournalModel.cs" />
+    <Compile Include="Models\IO\Export\Journals\ExportJournalsModel.cs" />
+    <Compile Include="Models\IO\Export\Newspapers\ExportableNewspaperModel.cs" />
+    <Compile Include="Models\IO\Export\Newspapers\ExportNewspapersModel.cs" />
+    <Compile Include="Models\IO\Import\Books\ImportBooksResultModel.cs" />
+    <Compile Include="Models\IO\Import\Journals\ImportJournalsResultModel.cs" />
+    <Compile Include="Models\IO\Import\Newspapers\ImportNewspapersResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +256,7 @@
     <Content Include="Content\Styles\Theme\Variables.min.css">
       <DependentUpon>Variables.css</DependentUpon>
     </Content>
+    <Content Include="Content\Templates\export-books.html" />
     <Content Include="Content\Templates\newspapers.html" />
     <Content Include="Content\Templates\journals.html" />
     <Content Include="Content\Templates\books.html" />
@@ -294,6 +306,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\accountController.js" />
+    <Content Include="Scripts\App\Controllers\exportController.js" />
     <Content Include="Scripts\App\Controllers\sellController.js" />
     <Content Include="Scripts\App\Controllers\newspapersController.js" />
     <Content Include="Scripts\App\Controllers\journalsController.js" />
@@ -301,6 +314,7 @@
     <Content Include="Scripts\App\directives.js" />
     <Content Include="Scripts\App\modules.js" />
     <Content Include="Scripts\App\Services\accountService.js" />
+    <Content Include="Scripts\App\Services\exportService.js" />
     <Content Include="Scripts\App\Services\sellService.js" />
     <Content Include="Scripts\App\Services\newspapersService.js" />
     <Content Include="Scripts\App\Services\journalsService.js" />

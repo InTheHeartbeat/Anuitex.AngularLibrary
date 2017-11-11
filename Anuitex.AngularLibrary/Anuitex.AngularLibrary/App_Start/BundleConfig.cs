@@ -27,11 +27,13 @@ namespace Anuitex.AngularLibrary
                       "~/Scripts/App/Services/newspapersService.js",                      
                       "~/Scripts/App/Services/accountService.js",
                       "~/Scripts/App/Services/sellService.js",
+                      "~/Scripts/App/Services/exportService.js",
                       "~/Scripts/App/Controllers/booksController.js",
                       "~/Scripts/App/Controllers/journalsController.js",
                       "~/Scripts/App/Controllers/newspapersController.js",
                       "~/Scripts/App/Controllers/accountController.js",
                       "~/Scripts/App/Controllers/sellController.js",
+                      "~/Scripts/App/Controllers/exportController.js",
                       "~/Scripts/App/directives.js",
                       "~/Scripts/respond.js",
                      "~/Scripts/ngDialog.min.js"));

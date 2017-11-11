@@ -13,7 +13,8 @@ var sharedModule;
         var data = {};
 
         data.CurrentUser = {};
-      
+        data.Nav = {};
+
         return data;
     });
 
@@ -21,14 +22,17 @@ var sharedModule;
     booksModule = angular.module('booksModule', ['sharedModule']);
     journalsModule = angular.module('journalsModule', ['sharedModule']);
     newspapersModule = angular.module('newspapersModule', ['sharedModule']);
-    libraryModule = angular.module('libraryModule', ['booksModule', 'journalsModule', 'newspapersModule', 'accountModule', 'ngDialog']);
+    libraryModule = angular.module('libraryModule', ['booksModule', 'journalsModule', 'newspapersModule', 'accountModule', 'ngDialog', 'sharedModule']);
 
-    libraryModule.controller('navController', function($scope) {
-        $scope.NavModes = ["Books", "Journals", "Newspapers"];
-        $scope.CurrentNav = $scope.NavModes[0];
+    libraryModule.controller('navController', function($scope, sharedService) {
+        $scope.LibSections = ["Books", "Journals", "Newspapers"];
+        $scope.FuncSections = ["ExportBooks"];
+        $scope.CurrentNav = $scope.LibSections[0];
         $scope.applyNav = function(nav) {
             $scope.CurrentNav = nav;
         }
+
+        sharedService.Nav = $scope;
     });
 
 })();

@@ -1,0 +1,56 @@
+﻿<div ng-controller="exportController">
+    <div class="nav-sector-controls">
+        <div class="btn btn-icon" ng-click="exportBooks()">
+            <span class="icon ic-accept"></span>
+        </div>        
+        <div class="raw-xml-switch">
+            <h4>Raw</h4>
+            <label class="checkbox-switch">
+                <input type="checkbox" ng-model="ExportBooksModel.IsXml">                
+                <span class="slider round"></span>
+            </label>
+            <h4>Xml</h4>
+        </div>
+    </div>
+
+    <div class="windows-container entities-container">        
+        <ul class="windows-grid" ng-repeat="book in ExportBooksModel.Books">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-book"></span>
+                        <h4>{{book.Author}} - {{book.Title}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{book.Id}}" ng-model="book.Selected">
+                            <label for="cb-sellected-{{book.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{book.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{book.Title}}</span>
+                        <br/>
+                        <span>Author:</span>
+                        <span>{{book.Author}}</span>
+                        <br/>
+                        <span>Genre:</span>
+                        <span>{{book.Genre}}</span>
+                        <br/>
+                        <span>Year:</span>
+                        <span>{{book.Year}}</span>
+                        <br/>
+                        <span>Pages:</span>
+                        <span>{{book.Pages}}</span>
+                        <br/>
+                        <span>Available:</span>
+                        <span>{{book.Amount}}</span>
+                        <br/>
+                        <span>Price:</span>
+                        <span><b>{{book.Price}}</b></span>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

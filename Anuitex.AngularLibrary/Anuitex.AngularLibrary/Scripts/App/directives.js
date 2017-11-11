@@ -27,3 +27,13 @@ newspapersModule.directive('newspapers',
             replace: true
         }
     });
+
+libraryModule.directive('exportbooks',
+    function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'Content/Templates/export-books.html',
+            scope: false,
+            replace: true
+        }
+    });
