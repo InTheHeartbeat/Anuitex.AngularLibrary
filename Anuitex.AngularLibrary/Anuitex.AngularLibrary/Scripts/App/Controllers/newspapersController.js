@@ -7,14 +7,10 @@
     $scope.$watch(function () { return sharedService.CurrentUser; }, function (newValue, oldValue) {
         if (newValue !== oldValue) $scope.IsAdmin = newValue.IsAdmin;
     });
-
-    function loadNewspapers() {        
-        var newspapers = newspapersService.get();
-        
-        newspapers.then(function (bk) { $scope.Newspapers = bk.data;
-        }, function (err) { alert('failture loading Newspapers ' + err); });
+    
+    $scope.export = function () {
+        sharedService.Nav.applyNav('ExportNewspapers');
     }
-
     $scope.showEditNewspaperDialog = function (newspaper) {        
         $scope.Current = newspaper;
         $scope.Current.IsEdit = true;
@@ -25,14 +21,6 @@
             scope: $scope
         });        
     }
-    $scope.tryEditNewspaper = function(newspaper) {
-        var request = newspapersService.put(newspaper);
-        request.then(function(responce) {
-            ngDialog.close('editNewspaperDialog');
-            loadNewspapers();
-        }, function (err) { alert(err.statusText); });
-    }
-
     $scope.showAddNewspaperDialog = function () {
         $scope.Current = {};
         $scope.Current.IsEdit = false;
@@ -40,24 +28,45 @@
             name: 'addNewspaperDialog',
             template: 'Content/Templates/Modal/editNewspaperDialogTemplate.html',
             className: 'ngdialog-theme-flat ngdialog-theme-custom ng-dialog-form',
-            scope: $scope 
-        }); 
+            scope: $scope
+        });
+    }
+    
+    $scope.tryEditNewspaper = function(newspaper) {
+        newspapersService.put(newspaper).then(function(response) {
+                ngDialog.close('editNewspaperDialog');
+                loadNewspapers();
+            },
+            function(err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
     }
     $scope.tryAddNewspaper = function (newspaper) {
-        var request = newspapersService.post(newspaper);
-        request.then(function (responce) {
+        newspapersService.post(newspaper).then(function (response) {
             ngDialog.close('addNewspaperDialog');
             loadNewspapers();
-        }, function (err) { alert(err.statusText); });        
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
     }
-
     $scope.delete = function(Id) {
-        newspapersService.delete(Id).then(function (responce) {            
+        newspapersService.delete(Id).then(function (response) {            
             loadNewspapers();
-        }, function (err) { alert(err.statusText); });
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
     }
-
-    $scope.export = function () {       
-        sharedService.Nav.applyNav('ExportNewspapers');
+  
+    function loadNewspapers() {
+        newspapersService.get().then(function (bk) {
+                $scope.Newspapers = bk.data;
+            },
+            function (err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
     }
 });

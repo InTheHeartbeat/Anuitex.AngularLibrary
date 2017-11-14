@@ -134,9 +134,8 @@ namespace Anuitex.AngularLibrary.Helpers
                 }
             }
             return "";
-        }
-
-        public static List<BookModel> ImportBooks(Stream stream, bool isXml)
+        }    
+        private static List<BookModel> ImportBooks(Stream stream, bool isXml)
         {
             stream.Position = 0;
             stream.Seek(0, SeekOrigin.Begin);            
@@ -174,8 +173,7 @@ namespace Anuitex.AngularLibrary.Helpers
                 return result;
             }
         }
-
-        public static List<JournalModel> ImportJournals(Stream stream, bool isXml)
+        private static List<JournalModel> ImportJournals(Stream stream, bool isXml)
         {
             stream.Position = 0;
             stream.Seek(0, SeekOrigin.Begin);
@@ -211,9 +209,8 @@ namespace Anuitex.AngularLibrary.Helpers
                 }
                 return result;
             }
-        }
-
-        public static List<NewspaperModel> ImportNewspapers(Stream stream, bool isXml)
+        }   
+        private static List<NewspaperModel> ImportNewspapers(Stream stream, bool isXml)
         {
             stream.Position = 0;
             stream.Seek(0, SeekOrigin.Begin);

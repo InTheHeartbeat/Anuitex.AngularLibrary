@@ -23,6 +23,7 @@ namespace Anuitex.AngularLibrary
                      "~/Scripts/angular.js",
                      "~/Scripts/ng-file-upload.min.js",
                       "~/Scripts/App/modules.js",
+                     "~/Scripts/App/Services/sharedService.js",
                       "~/Scripts/App/Services/booksService.js",
                       "~/Scripts/App/Services/journalsService.js",
                       "~/Scripts/App/Services/newspapersService.js",                      
@@ -30,6 +31,7 @@ namespace Anuitex.AngularLibrary
                       "~/Scripts/App/Services/sellService.js",
                       "~/Scripts/App/Services/exportService.js",
                       "~/Scripts/App/Services/importService.js",
+                     "~/Scripts/App/Controllers/navController.js",
                       "~/Scripts/App/Controllers/booksController.js",
                       "~/Scripts/App/Controllers/journalsController.js",
                       "~/Scripts/App/Controllers/newspapersController.js",
@@ -41,8 +43,7 @@ namespace Anuitex.AngularLibrary
                       "~/Scripts/App/Controllers/IO/Import/importController.js",
                       "~/Scripts/App/directives.js",
                       "~/Scripts/respond.js",
-                     "~/Scripts/ngDialog.min.js",
-                     "~/Scripts/App/app.js"));
+                     "~/Scripts/ngDialog.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

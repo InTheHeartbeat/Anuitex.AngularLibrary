@@ -1,20 +1,26 @@
 ﻿libraryModule.controller('exportJournalsController', function ($scope, exportService) {
 
     $scope.ExportJournalsModel = {};    
-    
-    function getExportableJournals() {
-        exportService.getExportableJournals().then(function (response) { $scope.ExportJournalsModel = response.data;
-            console.log(response.data);
-        });
-    }  
+       
     getExportableJournals();
 
     $scope.exportJournals = function() {
         exportService.exportJournals($scope.ExportJournalsModel).then(function (response) {                       
             saveFile(response.headers('Content-Disposition'),response.data);
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
         });
     }
 
+    function getExportableJournals() {
+        exportService.getExportableJournals().then(function (response) {
+            $scope.ExportJournalsModel = response.data;
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    }
     function saveFile(disposition, data) {
         var filename = "";        
         if (disposition) {

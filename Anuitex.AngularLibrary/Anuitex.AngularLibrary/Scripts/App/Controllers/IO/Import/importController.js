@@ -26,6 +26,7 @@
                     sharedService.Nav.applyNav("ImportResult");
                 },
                 function(err) {
+                    alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
                     console.log(err);
                 },
                 function(evt) {
@@ -36,8 +37,10 @@
                 });
         }
     }
-
     $scope.confirmImport = function() {
-        importService.confirmImport($scope.ImportModel).then(function () { sharedService.Nav.applyNav("Books"); });        
+        importService.confirmImport($scope.ImportModel).then(function () { sharedService.Nav.applyNav("Books"); }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });        
     }
 });

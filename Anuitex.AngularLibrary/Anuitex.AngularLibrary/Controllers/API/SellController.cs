@@ -20,88 +20,108 @@ namespace Anuitex.AngularLibrary.Controllers.API
         [System.Web.Http.Route("api/Sell/GetBasket")]
         [ResponseType(typeof(BasketModel))]
         [System.Web.Http.HttpGet]
-        public BasketModel Basket()
+        public IHttpActionResult Basket()
         {
             BasketModel model = new BasketModel();
 
             if (CurrentUser != null)
             {
-                AccountOrder order = CurrentUser.AccountOrders.LastOrDefault(ord => !ord.Completed);
-
-                if (order != null)
+                try
                 {
-                    model.SumPrice = order.Sum;
-                    model.OrderId = order.Id;
-                    foreach (AccountOrderRecord record in order.AccountOrderRecords)
+                    AccountOrder order = CurrentUser.AccountOrders.LastOrDefault(ord => !ord.Completed);
+
+                    if (order != null)
                     {
-                        if (record.ProductType == typeof(Book).Name)
+                        model.SumPrice = order.Sum;
+                        model.OrderId = order.Id;
+                        foreach (AccountOrderRecord record in order.AccountOrderRecords)
                         {
-                            model.BookProducts.Add(
-                                new BookModel(
-                                    DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId)));
-                        }
-                        if (record.ProductType == typeof(Journal).Name)
-                        {
-                            model.JournalProducts.Add(
-                                new JournalModel(
-                                    DataContext.Journals.FirstOrDefault(
-                                        journal => journal.Id == record.ProductId)));
-                        }
-                        if (record.ProductType == typeof(Newspaper).Name)
-                        {
-                            model.NewspaperProducts.Add(
-                                new NewspaperModel(
-                                    DataContext.Newspapers.FirstOrDefault(
-                                        newspaper => newspaper.Id == record.ProductId)));
+                            if (record.ProductType == typeof(Book).Name)
+                            {
+                                model.BookProducts.Add(
+                                    new BookModel(
+                                        DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId)));
+                            }
+                            if (record.ProductType == typeof(Journal).Name)
+                            {
+                                model.JournalProducts.Add(
+                                    new JournalModel(
+                                        DataContext.Journals.FirstOrDefault(
+                                            journal => journal.Id == record.ProductId)));
+                            }
+                            if (record.ProductType == typeof(Newspaper).Name)
+                            {
+                                model.NewspaperProducts.Add(
+                                    new NewspaperModel(
+                                        DataContext.Newspapers.FirstOrDefault(
+                                            newspaper => newspaper.Id == record.ProductId)));
+                            }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
                 }
             }
 
             if (CurrentVisitor != null)
             {
-                VisitorOrder order = CurrentVisitor.VisitorOrders.LastOrDefault(ord => !ord.Completed);
-
-                if (order != null)
+                try
                 {
-                    model.SumPrice = order.Sum;
-                    model.OrderId = order.Id;
-                    foreach (VisitorOrderRecord record in order.VisitorOrderRecords)
+                    VisitorOrder order = CurrentVisitor.VisitorOrders.LastOrDefault(ord => !ord.Completed);
+
+                    if (order != null)
                     {
-                        if (record.ProductType == typeof(Book).Name)
+                        model.SumPrice = order.Sum;
+                        model.OrderId = order.Id;
+                        foreach (VisitorOrderRecord record in order.VisitorOrderRecords)
                         {
-                            model.BookProducts.Add(
-                                new BookModel(
-                                    DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId)));
-                        }
-                        if (record.ProductType == typeof(Journal).Name)
-                        {
-                            model.JournalProducts.Add(
-                                new JournalModel(
-                                    DataContext.Journals.FirstOrDefault(
-                                        journal => journal.Id == record.ProductId)));
-                        }
-                        if (record.ProductType == typeof(Newspaper).Name)
-                        {
-                            model.NewspaperProducts.Add(
-                                new NewspaperModel(
-                                    DataContext.Newspapers.FirstOrDefault(
-                                        newspaper => newspaper.Id == record.ProductId)));
+                            if (record.ProductType == typeof(Book).Name)
+                            {
+                                model.BookProducts.Add(
+                                    new BookModel(
+                                        DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId)));
+                            }
+                            if (record.ProductType == typeof(Journal).Name)
+                            {
+                                model.JournalProducts.Add(
+                                    new JournalModel(
+                                        DataContext.Journals.FirstOrDefault(
+                                            journal => journal.Id == record.ProductId)));
+                            }
+                            if (record.ProductType == typeof(Newspaper).Name)
+                            {
+                                model.NewspaperProducts.Add(
+                                    new NewspaperModel(
+                                        DataContext.Newspapers.FirstOrDefault(
+                                            newspaper => newspaper.Id == record.ProductId)));
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
             }                        
-            return model;
+            return Ok(model);
         }
-
 
         [System.Web.Http.Route("api/Sell/SellProduct")]        
         [System.Web.Http.HttpPost]
         public IHttpActionResult SellProduct(SellProductModel model)
         {
-            SellIsAccount(model.Code, model.Type, model.Count);
-            SellIsVisitor(model.Code, model.Type, model.Count);
-            return Ok();
+            try
+            {
+                SellIsAccount(model.Code, model.Type, model.Count);
+                SellIsVisitor(model.Code, model.Type, model.Count);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }           
         }
 
         [System.Web.Http.Route("api/Sell/AcceptSellOrder")]
@@ -110,59 +130,75 @@ namespace Anuitex.AngularLibrary.Controllers.API
         {
             if (CurrentUser != null)
             {
-                AccountOrder order = DataContext.AccountOrders.FirstOrDefault(ord => ord.Id == orderId.OrderId);
-                if (order != null)
+                try
                 {
-                    foreach (AccountOrderRecord record in order.AccountOrderRecords)
+                    AccountOrder order = DataContext.AccountOrders.FirstOrDefault(ord => ord.Id == orderId.OrderId);
+                    if (order != null)
                     {
-                        if (record.ProductType == typeof(Book).Name)
+                        foreach (AccountOrderRecord record in order.AccountOrderRecords)
                         {
-                            DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId).Amount -=
-                                record.Count;
+                            if (record.ProductType == typeof(Book).Name)
+                            {
+                                DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
+                            if (record.ProductType == typeof(Journal).Name)
+                            {
+                                DataContext.Journals.FirstOrDefault(jor => jor.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
+                            if (record.ProductType == typeof(Newspaper).Name)
+                            {
+                                DataContext.Newspapers.FirstOrDefault(np => np.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
                         }
-                        if (record.ProductType == typeof(Journal).Name)
-                        {
-                            DataContext.Journals.FirstOrDefault(jor => jor.Id == record.ProductId).Amount -=
-                                record.Count;
-                        }
-                        if (record.ProductType == typeof(Newspaper).Name)
-                        {
-                            DataContext.Newspapers.FirstOrDefault(np => np.Id == record.ProductId).Amount -= record.Count;
-                        }
+
+                        order.Completed = true;
+
+                        DataContext.SubmitChanges();
                     }
-
-                    order.Completed = true;
-
-                    DataContext.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
                 }
             }
 
             if (CurrentVisitor != null)
             {
-                VisitorOrder order = DataContext.VisitorOrders.FirstOrDefault(ord => ord.Id == orderId.OrderId);
-                if (order != null)
+                try
                 {
-                    foreach (VisitorOrderRecord record in order.VisitorOrderRecords)
+                    VisitorOrder order = DataContext.VisitorOrders.FirstOrDefault(ord => ord.Id == orderId.OrderId);
+                    if (order != null)
                     {
-                        if (record.ProductType == typeof(Book).Name)
+                        foreach (VisitorOrderRecord record in order.VisitorOrderRecords)
                         {
-                            DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId).Amount -=
-                                record.Count;
+                            if (record.ProductType == typeof(Book).Name)
+                            {
+                                DataContext.Books.FirstOrDefault(book => book.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
+                            if (record.ProductType == typeof(Journal).Name)
+                            {
+                                DataContext.Journals.FirstOrDefault(jor => jor.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
+                            if (record.ProductType == typeof(Newspaper).Name)
+                            {
+                                DataContext.Newspapers.FirstOrDefault(np => np.Id == record.ProductId).Amount -=
+                                    record.Count;
+                            }
                         }
-                        if (record.ProductType == typeof(Journal).Name)
-                        {
-                            DataContext.Journals.FirstOrDefault(jor => jor.Id == record.ProductId).Amount -=
-                                record.Count;
-                        }
-                        if (record.ProductType == typeof(Newspaper).Name)
-                        {
-                            DataContext.Newspapers.FirstOrDefault(np => np.Id == record.ProductId).Amount -= record.Count;
-                        }
+
+                        order.Completed = true;
+
+                        DataContext.SubmitChanges();
                     }
-
-                    order.Completed = true;
-
-                    DataContext.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
                 }
             }
 
@@ -173,27 +209,35 @@ namespace Anuitex.AngularLibrary.Controllers.API
         [System.Web.Http.HttpPost]
         public IHttpActionResult RemoveProductFromBasket(RemoveProductFromBasketModel model)
         {
-            AccountOrder currentAccountOrder = CurrentUser?.AccountOrders.LastOrDefault(ord => !ord.Completed);
-            AccountOrderRecord accountOrderRecord = currentAccountOrder?.AccountOrderRecords.FirstOrDefault(
-                rec => rec.ProductId == model.ProductId && rec.ProductType == model.ProductType);
-            if (accountOrderRecord != null)
+            try
             {
-                DataContext.AccountOrderRecords.DeleteOnSubmit(accountOrderRecord);
-                DataContext.SubmitChanges();
-                CalcAccountOrderSum(currentAccountOrder, accountOrderRecord.Count);
-            }
-
-            VisitorOrder currentVisitorOrder = CurrentVisitor?.VisitorOrders.LastOrDefault(ord => !ord.Completed);
-            VisitorOrderRecord visitorOrderRecord =
-                currentVisitorOrder?.VisitorOrderRecords.FirstOrDefault(
+                AccountOrder currentAccountOrder = CurrentUser?.AccountOrders.LastOrDefault(ord => !ord.Completed);
+                AccountOrderRecord accountOrderRecord = currentAccountOrder?.AccountOrderRecords.FirstOrDefault(
                     rec => rec.ProductId == model.ProductId && rec.ProductType == model.ProductType);
-            if (visitorOrderRecord != null)
-            {
-                DataContext.VisitorOrderRecords.DeleteOnSubmit(visitorOrderRecord);
-                DataContext.SubmitChanges();
-                CalcVisitorOrderSum(currentVisitorOrder, visitorOrderRecord.Count);
-            }
+                if (accountOrderRecord != null)
+                {
+                    DataContext.AccountOrderRecords.DeleteOnSubmit(accountOrderRecord);
+                    DataContext.SubmitChanges();
+                    CalcAccountOrderSum(currentAccountOrder, accountOrderRecord.Count);
+                    return Ok();
+                }
 
+                VisitorOrder currentVisitorOrder = CurrentVisitor?.VisitorOrders.LastOrDefault(ord => !ord.Completed);
+                VisitorOrderRecord visitorOrderRecord =
+                    currentVisitorOrder?.VisitorOrderRecords.FirstOrDefault(
+                        rec => rec.ProductId == model.ProductId && rec.ProductType == model.ProductType);
+                if (visitorOrderRecord != null)
+                {
+                    DataContext.VisitorOrderRecords.DeleteOnSubmit(visitorOrderRecord);
+                    DataContext.SubmitChanges();
+                    CalcVisitorOrderSum(currentVisitorOrder, visitorOrderRecord.Count);
+                    return Ok();
+                }
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
             return Ok();
         }
 
@@ -235,7 +279,6 @@ namespace Anuitex.AngularLibrary.Controllers.API
                 DataContext.SubmitChanges();
             }
         }
-
         private void CalcAccountOrderSum(AccountOrder order, int count)
         {
             if (order == null)
@@ -336,6 +379,5 @@ namespace Anuitex.AngularLibrary.Controllers.API
             }
             DataContext.SubmitChanges();
         }
-
     }
 }

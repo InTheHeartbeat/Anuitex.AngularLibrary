@@ -24,16 +24,23 @@ namespace Anuitex.AngularLibrary.Controllers.API
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             if (CurrentUser == null || !CurrentUser.IsAdmin) { return Unauthorized(); }
 
-            DataContext.Newspapers.InsertOnSubmit(new Newspaper()
+            try
             {
-                Title = newspaper.Title,
-                Date = newspaper.Date,
-                Periodicity = newspaper.Periodicity,
-                Amount = newspaper.Amount,
-                Price = newspaper.Price,                
-                PhotoId = newspaper?.PhotoId
-            });
-            DataContext.SubmitChanges();
+                DataContext.Newspapers.InsertOnSubmit(new Newspaper()
+                {
+                    Title = newspaper.Title,
+                    Date = newspaper.Date,
+                    Periodicity = newspaper.Periodicity,
+                    Amount = newspaper.Amount,
+                    Price = newspaper.Price,
+                    PhotoId = newspaper?.PhotoId
+                });
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }
@@ -49,14 +56,21 @@ namespace Anuitex.AngularLibrary.Controllers.API
 
             if (newspaper == null) { return NotFound(); }
 
-            newspaper.Title = newspaperModel.Title;
-            newspaper.Date = newspaperModel.Date;
-            newspaper.Periodicity = newspaperModel.Periodicity;           
-            newspaper.Price = newspaperModel.Price;
-            newspaper.Amount = newspaperModel.Amount;
-            newspaper.PhotoId = newspaperModel?.PhotoId;
+            try
+            {
+                newspaper.Title = newspaperModel.Title;
+                newspaper.Date = newspaperModel.Date;
+                newspaper.Periodicity = newspaperModel.Periodicity;
+                newspaper.Price = newspaperModel.Price;
+                newspaper.Amount = newspaperModel.Amount;
+                newspaper.PhotoId = newspaperModel?.PhotoId;
 
-            DataContext.SubmitChanges();
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }
@@ -71,8 +85,15 @@ namespace Anuitex.AngularLibrary.Controllers.API
 
             if (forDelete == null) { return NotFound(); }
 
-            DataContext.Newspapers.DeleteOnSubmit(forDelete);
-            DataContext.SubmitChanges();
+            try
+            {
+                DataContext.Newspapers.DeleteOnSubmit(forDelete);
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }

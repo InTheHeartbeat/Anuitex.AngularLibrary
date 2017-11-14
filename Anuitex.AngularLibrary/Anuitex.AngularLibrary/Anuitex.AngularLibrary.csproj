@@ -199,17 +199,14 @@
     <Compile Include="Helpers\ExportHelper.cs" />
     <Compile Include="Helpers\ImportHelper.cs" />
     <Compile Include="Models\BasketModel.cs" />
-    <Compile Include="Models\BooksCollectionModel.cs" />
     <Compile Include="Models\IO\Export\Books\ExportableBookModel.cs" />
     <Compile Include="Models\IO\Export\Books\ExportBooksModel.cs" />
     <Compile Include="Models\IO\Export\Journals\ExportableJournalModel.cs" />
     <Compile Include="Models\IO\Export\Journals\ExportJournalsModel.cs" />
     <Compile Include="Models\IO\Export\Newspapers\ExportableNewspaperModel.cs" />
     <Compile Include="Models\IO\Export\Newspapers\ExportNewspapersModel.cs" />
-    <Compile Include="Models\IO\Import\Books\ImportBooksResultModel.cs" />
     <Compile Include="Models\IO\Import\ImportResultModel.cs" />
-    <Compile Include="Models\IO\Import\Journals\ImportJournalsResultModel.cs" />
-    <Compile Include="Models\IO\Import\Newspapers\ImportNewspapersResultModel.cs" />
+    <Compile Include="Models\LoginDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -325,7 +322,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\Controllers\navController.js" />
     <Content Include="Scripts\App\Controllers\accountController.js" />
     <Content Include="Scripts\App\Controllers\IO\Export\exportNewspapersController.js" />
     <Content Include="Scripts\App\Controllers\IO\Export\exportJournalsController.js" />
@@ -337,6 +334,7 @@
     <Content Include="Scripts\App\Controllers\booksController.js" />
     <Content Include="Scripts\App\directives.js" />
     <Content Include="Scripts\App\modules.js" />
+    <Content Include="Scripts\App\Services\sharedService.js" />
     <Content Include="Scripts\App\Services\accountService.js" />
     <Content Include="Scripts\App\Services\importService.js" />
     <Content Include="Scripts\App\Services\exportService.js" />

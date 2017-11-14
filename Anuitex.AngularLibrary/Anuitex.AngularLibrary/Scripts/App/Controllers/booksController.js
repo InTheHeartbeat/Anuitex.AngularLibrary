@@ -6,20 +6,10 @@
     loadBooks();    
 
     $scope.$watch(function () { return sharedService.CurrentUser; }, function (newValue, oldValue) {
-        if (newValue !== oldValue) $scope.IsAdmin = newValue.IsAdmin;        
+        if (newValue !== oldValue){ $scope.IsAdmin = newValue.IsAdmin;}        
     });
-
-    function loadBooks() {
-        var books = booksService.get();
         
-        books.then(function (bk) { $scope.Books = bk.data; }, function (err) { alert('failture loading Books ' + err); });
-    }
-
-    $scope.export = function() {        
-        sharedService.Nav.applyNav('ExportBooks');
-    }
-
-    $scope.showEditBookDialog = function (book) {        
+    $scope.showEditBookDialog = function (book) {
         $scope.Current = book;
         $scope.Current.IsEdit = true;
         ngDialog.open({
@@ -27,16 +17,8 @@
             template: 'Content/Templates/Modal/editBookDialogTemplate.html',
             className: 'ngdialog-theme-flat ngdialog-theme-custom ng-dialog-form',
             scope: $scope
-        });        
+        });
     }
-    $scope.tryEditBook = function(book) {
-        var request = booksService.put(book);
-        request.then(function(responce) {
-            ngDialog.close('editBookDialog');
-            loadBooks();
-        }, function (err) { alert(err.statusText); });
-    }
-
     $scope.showAddBookDialog = function () {
         $scope.Current = {};
         $scope.Current.IsEdit = false;
@@ -44,23 +26,47 @@
             name: 'addBookDialog',
             template: 'Content/Templates/Modal/editBookDialogTemplate.html',
             className: 'ngdialog-theme-flat ngdialog-theme-custom ng-dialog-form',
-            scope: $scope 
-        }); 
+            scope: $scope
+        });
+    }
+    $scope.export = function() {        
+        sharedService.Nav.applyNav('ExportBooks');
     }
 
+    $scope.tryEditBook = function (book) {
+        booksService.put(book).then(function (response) {
+                ngDialog.close('editBookDialog');
+                loadBooks();
+            },
+            function (err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
+    }
     $scope.tryAddBook = function (book) {
-        var request = booksService.post(book);
-        request.then(function (responce) {
-            ngDialog.close('addBookDialog');
+        booksService.post(book).then(function (response) {
+                ngDialog.close('addBookDialog');
+                loadBooks();
+            },
+            function (err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
+    }
+    $scope.delete = function (Id) {
+        booksService.delete(Id).then(function (response) {
             loadBooks();
-        }, function (err) { alert(err.statusText); });        
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
     }
 
-
-    $scope.delete = function(Id) {
-        booksService.delete(Id).then(function (responce) {            
-            loadBooks();
-        }, function (err) { alert(err.statusText); });
+    function loadBooks() {
+        booksService.get().then(function (bk) { $scope.Books = bk.data; },
+            function (err) {
+                alert('failture loading Books ' + err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
     }
-
 });

@@ -2,19 +2,16 @@
 
     $scope.IsEdit = false;
     $scope.IsAdmin = sharedService.CurrentUser.IsAdmin;    
-    loadJournals();    
+
+    loadJournals();
 
     $scope.$watch(function () { return sharedService.CurrentUser; }, function (newValue, oldValue) {
-        if (newValue !== oldValue) $scope.IsAdmin = newValue.IsAdmin;
-    });
+        if (newValue !== oldValue) {$scope.IsAdmin = newValue.IsAdmin;}
+    });    
 
-    function loadJournals() {        
-        var journals = journalsService.get();
-        
-        journals.then(function (bk) { $scope.Journals = bk.data;
-        }, function (err) { alert('failture loading Journals ' + err); });
+    $scope.export = function () {
+        sharedService.Nav.applyNav('ExportJournals');
     }
-
     $scope.showEditJournalDialog = function (journal) {        
         $scope.Current = journal;
         $scope.Current.IsEdit = true;
@@ -24,15 +21,7 @@
             className: 'ngdialog-theme-flat ngdialog-theme-custom ng-dialog-form',
             scope: $scope
         });        
-    }
-    $scope.tryEditJournal = function(journal) {
-        var request = journalsService.put(journal);
-        request.then(function(responce) {
-            ngDialog.close('editJournalDialog');
-            loadJournals();
-        }, function (err) { alert(err.statusText); });
-    }
-
+    }    
     $scope.showAddJournalDialog = function () {
         $scope.Current = {};
         $scope.Current.IsEdit = false;
@@ -43,21 +32,43 @@
             scope: $scope 
         }); 
     }
+
+    $scope.tryEditJournal = function (journal) {
+        journalsService.put(journal).then(function (response) {
+                ngDialog.close('editJournalDialog');
+                loadJournals();
+            },
+            function (err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
+    }
     $scope.tryAddJournal = function (journal) {
-        var request = journalsService.post(journal);
-        request.then(function (responce) {
-            ngDialog.close('addJournalDialog');
-            loadJournals();
-        }, function (err) { alert(err.statusText); });        
+        journalsService.post(journal).then(function(response) {
+                ngDialog.close('addJournalDialog');
+                loadJournals();
+            },
+            function(err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
     }
-
-    $scope.delete = function(Id) {
-        journalsService.delete(Id).then(function (responce) {            
+    $scope.delete = function (Id) {
+        journalsService.delete(Id).then(function (response) {
             loadJournals();
-        }, function (err) { alert(err.statusText); });
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
     }
-
-    $scope.export = function () {        
-        sharedService.Nav.applyNav('ExportJournals');
+    
+    function loadJournals() {
+        journalsService.get().then(function (bk) {
+                $scope.Journals = bk.data;
+            },
+            function (err) {
+                alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+                console.log(err);
+            });
     }
 });

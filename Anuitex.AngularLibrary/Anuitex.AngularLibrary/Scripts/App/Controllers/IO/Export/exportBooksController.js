@@ -1,19 +1,24 @@
 ﻿libraryModule.controller('exportBooksController', function ($scope, exportService) {
 
     $scope.ExportBooksModel = {};
-
-    function getExportableBooks() {
-        exportService.getExportableBooks().then(function (response) { $scope.ExportBooksModel = response.data; });
-    }    
+     
     getExportableBooks();
-
 
     $scope.exportBooks = function() {
         exportService.exportBooks($scope.ExportBooksModel).then(function (response) {                       
             saveFile(response.headers('Content-Disposition'),response.data);
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
         });
     }
 
+    function getExportableBooks() {
+        exportService.getExportableBooks().then(function (response) { $scope.ExportBooksModel = response.data; }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    }
     function saveFile(disposition, data) {
         var filename = "";        
         if (disposition) {
@@ -29,5 +34,5 @@
         a.href = window.URL.createObjectURL(new Blob([data], { type: "application/octet-stream" }));
         a.download = filename;
         a.click();
-    }
+    }    
 });

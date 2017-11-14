@@ -22,29 +22,35 @@ namespace Anuitex.AngularLibrary.Controllers.API
                 return BadRequest();
             }
 
-            MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
-
-            string relPath = "/Upload/Images/";
-            string root = System.Web.HttpContext.Current.Server.MapPath("~/" + relPath);
-            int id = -1;
-
-            await Request.Content.ReadAsMultipartAsync(provider);
-            foreach (HttpContent content in provider.Contents)
+            try
             {
-                string fileName = content.Headers.ContentDisposition.FileName.Trim('\"');
-                string customFileName = Guid.NewGuid().ToString() + new FileInfo(fileName).Extension;
-                byte[] fileBytes = await content.ReadAsByteArrayAsync();
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
 
-                using (FileStream fs = new FileStream(root + customFileName, FileMode.Create))
+                string relPath = "/Upload/Images/";
+                string root = System.Web.HttpContext.Current.Server.MapPath("~/" + relPath);
+                int id = -1;
+
+                await Request.Content.ReadAsMultipartAsync(provider);
+                foreach (HttpContent content in provider.Contents)
                 {
-                    await fs.WriteAsync(fileBytes, 0, fileBytes.Length);
-                }
-                DataContext.Images.InsertOnSubmit(new Image() { Path = relPath + customFileName });
-                DataContext.SubmitChanges();
-                id = DataContext.Images.FirstOrDefault(img => img.Path == relPath + customFileName).Id;
-            }
+                    string fileName = content.Headers.ContentDisposition.FileName.Trim('\"');
+                    string customFileName = Guid.NewGuid().ToString() + new FileInfo(fileName).Extension;
+                    byte[] fileBytes = await content.ReadAsByteArrayAsync();
 
-            return Ok(id);
+                    using (FileStream fs = new FileStream(root + customFileName, FileMode.Create))
+                    {
+                        await fs.WriteAsync(fileBytes, 0, fileBytes.Length);
+                    }
+                    DataContext.Images.InsertOnSubmit(new Image() {Path = relPath + customFileName});
+                    DataContext.SubmitChanges();
+                    id = DataContext.Images.FirstOrDefault(img => img.Path == relPath + customFileName).Id;
+                }
+                return Ok(id);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }            
         }
     }
 }

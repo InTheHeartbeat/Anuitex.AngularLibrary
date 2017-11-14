@@ -26,17 +26,24 @@ namespace Anuitex.AngularLibrary.Controllers.API
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             if (CurrentUser == null || !CurrentUser.IsAdmin) { return Unauthorized(); }
 
-            DataContext.Journals.InsertOnSubmit(new Journal()
+            try
             {
-                Title = journal.Title,
-                Date = journal.Date,
-                Periodicity = journal.Periodicity,
-                Amount = journal.Amount,                
-                Price = journal.Price,
-                Subjects = journal.Subjects,
-                PhotoId = journal?.PhotoId
-            });
-            DataContext.SubmitChanges();
+                DataContext.Journals.InsertOnSubmit(new Journal()
+                {
+                    Title = journal.Title,
+                    Date = journal.Date,
+                    Periodicity = journal.Periodicity,
+                    Amount = journal.Amount,
+                    Price = journal.Price,
+                    Subjects = journal.Subjects,
+                    PhotoId = journal?.PhotoId
+                });
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }
@@ -52,15 +59,22 @@ namespace Anuitex.AngularLibrary.Controllers.API
 
             if (journal == null) { return NotFound(); }
 
-            journal.Title = journalModel.Title;
-            journal.Date = journalModel.Date;
-            journal.Periodicity = journalModel.Periodicity;
-            journal.Subjects = journalModel.Subjects;            
-            journal.Price = journalModel.Price;
-            journal.Amount = journalModel.Amount;
-            journal.PhotoId = journalModel?.PhotoId;
+            try
+            {
+                journal.Title = journalModel.Title;
+                journal.Date = journalModel.Date;
+                journal.Periodicity = journalModel.Periodicity;
+                journal.Subjects = journalModel.Subjects;
+                journal.Price = journalModel.Price;
+                journal.Amount = journalModel.Amount;
+                journal.PhotoId = journalModel?.PhotoId;
 
-            DataContext.SubmitChanges();
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }
@@ -74,9 +88,15 @@ namespace Anuitex.AngularLibrary.Controllers.API
             Journal forDelete = DataContext.Journals.FirstOrDefault(b => b.Id == id);
 
             if (forDelete == null) { return NotFound(); }
-
-            DataContext.Journals.DeleteOnSubmit(forDelete);
-            DataContext.SubmitChanges();
+            try
+            {
+                DataContext.Journals.DeleteOnSubmit(forDelete);
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }        

@@ -1,22 +1,9 @@
 ﻿libraryModule.controller('sellController', function ($scope, sellService, ngDialog) {
 
     $scope.Basket = {};
-
-    function loadBasket() {
-        sellService.getBasket().then(function(resp) {
-            $scope.Basket = resp.data;
-        });
-    };
-
+    
     loadBasket();
-
-    $scope.addToBasket = function(type, item) {
-        sellService.sellProduct({ Code: item.Id, type: type, count: 1 }).then(function () { loadBasket() });
-    };
-    $scope.removeFromBasket = function(id,type) {
-        sellService.removeProductFromBasket({ ProductId: id, ProductType: type }).then(function() { loadBasket() });
-    }
-
+   
     $scope.showBasket = function() {
         sellService.getBasket().then(function(resp) {
             $scope.Basket = resp.data;
@@ -29,11 +16,35 @@
             });
         });
     }
-
+    
+    $scope.addToBasket = function (type, item) {
+        sellService.sellProduct({ Code: item.Id, type: type, count: 1 }).then(function () { loadBasket() }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    };
+    $scope.removeFromBasket = function (id, type) {
+        sellService.removeProductFromBasket({ ProductId: id, ProductType: type }).then(function () { loadBasket() }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    }
     $scope.applyBasket = function(id) {
         sellService.acceptSellOrder(id).then(function() {
             ngDialog.close('basketDialog');
             loadBasket();
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
         });
-    } 
+    }
+
+    function loadBasket() {
+        sellService.getBasket().then(function (resp) {
+            $scope.Basket = resp.data;
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    };
 });

@@ -40,7 +40,14 @@ namespace Anuitex.AngularLibrary.Controllers.API
             if (!string.IsNullOrWhiteSpace(at) && !string.IsNullOrWhiteSpace(adr))
             {
                 Guid token = Guid.Parse(at);
-                CurrentUser = DataContext.AccountAccessRecords.FirstOrDefault(t => t.Token == token && t.Source == adr)?.Account;
+                try
+                {
+                    CurrentUser = DataContext.AccountAccessRecords.FirstOrDefault(t => t.Token == token && t.Source == adr)?.Account;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);                    
+                }                
             }
         }
 
@@ -50,7 +57,14 @@ namespace Anuitex.AngularLibrary.Controllers.API
             if (vt != null)
             {
                 Guid guid = Guid.Parse(vt);
-                CurrentVisitor = DataContext.Visitors.FirstOrDefault(v => v.Token == guid);
+                try
+                {
+                    CurrentVisitor = DataContext.Visitors.FirstOrDefault(v => v.Token == guid);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);                   
+                }                
             }
         }
     }

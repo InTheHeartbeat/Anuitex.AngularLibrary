@@ -1,19 +1,24 @@
 ﻿libraryModule.controller('exportNewspapersController', function ($scope, exportService) {
 
-    $scope.ExportNewspapersModel = [];
-
-    function getExportableNewspapers() {
-        exportService.getExportableNewspapers().then(function (response) { $scope.ExportNewspapersModel = response.data; console.log(response) });
-    }
+    $scope.ExportNewspapersModel = [];   
 
     getExportableNewspapers();
 
     $scope.exportNewspapers = function() {
         exportService.exportNewspapers($scope.ExportNewspapersModel).then(function (response) {                       
             saveFile(response.headers('Content-Disposition'),response.data);
+        }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
         });
     }
 
+    function getExportableNewspapers() {
+        exportService.getExportableNewspapers().then(function (response) { $scope.ExportNewspapersModel = response.data; }, function (err) {
+            alert(err.statusCode + " " + err.statusText + " " + err.statusMessage);
+            console.log(err);
+        });
+    }
     function saveFile(disposition, data) {
         var filename = "";        
         if (disposition) {

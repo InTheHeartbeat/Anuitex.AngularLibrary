@@ -53,7 +53,6 @@ namespace Anuitex.AngularLibrary.Helpers
                 return stream.ToArray();
             }
         }
-
         public static byte[] ExportJournals(ExportJournalsModel model, LibraryDataContext dataContext)
         {
             if (model.IsXml)
@@ -91,7 +90,6 @@ namespace Anuitex.AngularLibrary.Helpers
                 return stream.ToArray();
             }
         }
-
         public static byte[] ExportNewspapers(ExportNewspapersModel model, LibraryDataContext dataContext)
         {
             if (model.IsXml)
