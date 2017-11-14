@@ -68,7 +68,7 @@ namespace Anuitex.AngularLibrary.Helpers
             else
             {
                 MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream, Encoding.Default);
+                StreamWriter writer = new StreamWriter(stream);
 
                 writer.WriteLine("Journals");
 
@@ -107,7 +107,7 @@ namespace Anuitex.AngularLibrary.Helpers
             else
             {
                 MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream, Encoding.Default);
+                StreamWriter writer = new StreamWriter(stream);
 
                 writer.WriteLine("Newspapers");
 

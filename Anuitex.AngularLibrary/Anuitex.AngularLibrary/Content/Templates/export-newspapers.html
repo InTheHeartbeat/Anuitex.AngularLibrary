@@ -1,0 +1,49 @@
+﻿<div ng-controller="exportNewspapersController">
+    <div class="nav-sector-controls">
+        <div class="btn btn-icon" ng-click="exportNewspapers()">
+            <span class="icon ic-accept"></span>
+        </div>        
+        <div class="raw-xml-switch">
+            <h4>Raw</h4>
+            <label class="checkbox-switch">
+                <input type="checkbox" ng-model="ExportNewspapersModel.IsXml">                
+                <span class="slider round"></span>
+            </label>
+            <h4>Xml</h4>
+        </div>
+    </div>
+
+    <div class="windows-container entities-container">        
+        <ul class="windows-grid" ng-repeat="newspaper in ExportNewspapersModel.Newspapers">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-newspaper"></span>
+                        <h4>{{newspaper.Title}} - {{newspaper.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{newspaper.Id}}" ng-model="newspaper.Selected">
+                            <label for="cb-sellected-{{newspaper.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{newspaper.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{newspaper.Title}}</span>
+                        <br />
+                        <span>Date:</span>
+                        <span>{{newspaper.Date}}</span>
+                        <br />
+                        <span>Periodicity:</span>
+                        <span>{{newspaper.Periodicity}}</span>
+                        <br />
+                        <span>Available:</span>
+                        <span>{{newspaper.Amount}}</span>
+                        <br />
+                        <span>Price:</span>
+                        <span><b>{{newspaper.Price}}</b></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

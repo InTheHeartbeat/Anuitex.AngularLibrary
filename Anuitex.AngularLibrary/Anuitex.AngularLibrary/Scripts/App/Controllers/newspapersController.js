@@ -56,4 +56,8 @@
             loadNewspapers();
         }, function (err) { alert(err.statusText); });
     }
+
+    $scope.export = function () {       
+        sharedService.Nav.applyNav('ExportNewspapers');
+    }
 });

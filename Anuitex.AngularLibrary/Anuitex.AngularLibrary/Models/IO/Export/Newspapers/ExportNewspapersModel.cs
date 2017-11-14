@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 
 namespace Anuitex.AngularLibrary.Models.IO.Export.Newspapers
-{
-    [Serializable]
+{    
     public class ExportNewspapersModel
     {
         public List<ExportableNewspaperModel> Newspapers { get; set; }

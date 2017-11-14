@@ -19,8 +19,9 @@ namespace Anuitex.AngularLibrary
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-                 bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                      "~/Scripts/angular.js",
+                 bundles.Add(new ScriptBundle("~/bundles/app").Include(                     
+                     "~/Scripts/angular.js",
+                     "~/Scripts/ng-file-upload.min.js",
                       "~/Scripts/App/modules.js",
                       "~/Scripts/App/Services/booksService.js",
                       "~/Scripts/App/Services/journalsService.js",
@@ -28,15 +29,20 @@ namespace Anuitex.AngularLibrary
                       "~/Scripts/App/Services/accountService.js",
                       "~/Scripts/App/Services/sellService.js",
                       "~/Scripts/App/Services/exportService.js",
+                      "~/Scripts/App/Services/importService.js",
                       "~/Scripts/App/Controllers/booksController.js",
                       "~/Scripts/App/Controllers/journalsController.js",
                       "~/Scripts/App/Controllers/newspapersController.js",
                       "~/Scripts/App/Controllers/accountController.js",
                       "~/Scripts/App/Controllers/sellController.js",
-                      "~/Scripts/App/Controllers/exportController.js",
+                      "~/Scripts/App/Controllers/IO/Export/exportBooksController.js",
+                      "~/Scripts/App/Controllers/IO/Export/exportJournalsController.js",
+                      "~/Scripts/App/Controllers/IO/Export/exportNewspapersController.js",
+                      "~/Scripts/App/Controllers/IO/Import/importController.js",
                       "~/Scripts/App/directives.js",
                       "~/Scripts/respond.js",
-                     "~/Scripts/ngDialog.min.js"));
+                     "~/Scripts/ngDialog.min.js",
+                     "~/Scripts/App/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

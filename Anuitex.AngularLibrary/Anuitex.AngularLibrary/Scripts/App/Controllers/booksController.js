@@ -15,8 +15,7 @@
         books.then(function (bk) { $scope.Books = bk.data; }, function (err) { alert('failture loading Books ' + err); });
     }
 
-    $scope.export = function() {
-        console.log(sharedService.Nav);
+    $scope.export = function() {        
         sharedService.Nav.applyNav('ExportBooks');
     }
 

@@ -1,9 +1,14 @@
 ﻿<div class="main-content" ng-switch on="CurrentNav">
-    <books ng-switch-when="Books"></books>
-    <journals ng-switch-when="Journals"></journals>
-    <newspapers ng-switch-when="Newspapers"></newspapers>
-    <exportbooks ng-switch-when="ExportBooks"></exportbooks>
-</div>
+    <div ng-controller="importController">
+        <books ng-switch-when="Books"></books>
+        <journals ng-switch-when="Journals"></journals>
+        <newspapers ng-switch-when="Newspapers"></newspapers>
+        <exportbooks ng-switch-when="ExportBooks"></exportbooks>
+        <exportjournals ng-switch-when="ExportJournals"></exportjournals>
+        <exportnewspapers ng-switch-when="ExportNewspapers"></exportnewspapers>
+        <importresult ng-switch-when="ImportResult"></importresult>
+    </div>
+</div> 
 
 @section scripts
 {

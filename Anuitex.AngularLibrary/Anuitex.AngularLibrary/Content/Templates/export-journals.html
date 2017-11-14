@@ -1,0 +1,52 @@
+﻿<div ng-controller="exportJournalsController">
+    <div class="nav-sector-controls">
+        <div class="btn btn-icon" ng-click="exportJournals()">
+            <span class="icon ic-accept"></span>
+        </div>        
+        <div class="raw-xml-switch">
+            <h4>Raw</h4>
+            <label class="checkbox-switch">
+                <input type="checkbox" ng-model="ExportJournalsModel.IsXml">                
+                <span class="slider round"></span>
+            </label>
+            <h4>Xml</h4>
+        </div>
+    </div>
+
+    <div class="windows-container entities-container">        
+        <ul class="windows-grid" ng-repeat="journal in ExportJournalsModel.Journals">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-journal"></span>
+                        <h4>{{journal.Title}} - {{journal.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{journal.Id}}" ng-model="journal.Selected">
+                            <label for="cb-sellected-{{journal.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{journal.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{journal.Title}}</span>
+                        <br/>
+                        <span>Date:</span>
+                        <span>{{journal.Date}}</span>
+                        <br/>
+                        <span>Periodicity:</span>
+                        <span>{{journal.Periodicity}}</span>
+                        <br/>
+                        <span>Subjects:</span>
+                        <span>{{journal.Subjects}}</span>
+                        <br/>
+                        <span>Available:</span>
+                        <span>{{journal.Amount}}</span>
+                        <br/>
+                        <span>Price:</span>
+                        <span><b>{{journal.Price}}</b></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

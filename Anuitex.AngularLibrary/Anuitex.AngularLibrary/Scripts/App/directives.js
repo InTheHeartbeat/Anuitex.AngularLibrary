@@ -37,3 +37,30 @@ libraryModule.directive('exportbooks',
             replace: true
         }
     });
+libraryModule.directive('exportjournals',
+    function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'Content/Templates/export-journals.html',
+            scope: false,
+            replace: true
+        }
+    });
+libraryModule.directive('exportnewspapers',
+    function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'Content/Templates/export-newspapers.html',
+            scope: false,
+            replace: true
+        }
+    });
+libraryModule.directive('importresult',
+    function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'Content/Templates/importResult.html',
+            scope: false,
+            replace: true
+        }
+    });

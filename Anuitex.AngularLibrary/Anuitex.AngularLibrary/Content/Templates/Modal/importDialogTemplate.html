@@ -1,0 +1,13 @@
+﻿<div class="ngdialog-message">
+    <h2>Import</h2>
+   
+        <button class="btn btn-colored" type="file" ngf-select="uploadImportFile($file)"
+                 ngf-max-height="1000" ngf-max-size="1MB">
+        Select File</button>          
+    <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+        <span class="progress" ng-show="f.progress >= 0">
+            <div style="width:{{f.progress}}%"  
+                 ng-bind="f.progress + '%'"></div>
+        </span>
+    </div>     
+</div>  

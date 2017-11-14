@@ -1,0 +1,115 @@
+﻿<div>
+    <div class="nav-sector-controls">
+        <div class="btn btn-icon" ng-click="confirmImport()">
+            <span class="icon ic-accept"></span>
+        </div>        
+    </div>
+
+    <div class="windows-container entities-container">
+        <ul class="windows-grid" ng-repeat="book in ImportModel.Books">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-book"></span>
+                        <h4>{{book.Author}} - {{book.Title}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{book.Id}}" ng-model="book.Selected">
+                            <label for="cb-sellected-{{book.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{book.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{book.Title}}</span>
+                        <br />
+                        <span>Author:</span>
+                        <span>{{book.Author}}</span>
+                        <br />
+                        <span>Genre:</span>
+                        <span>{{book.Genre}}</span>
+                        <br />
+                        <span>Year:</span>
+                        <span>{{book.Year}}</span>
+                        <br />
+                        <span>Pages:</span>
+                        <span>{{book.Pages}}</span>
+                        <br />
+                        <span>Available:</span>
+                        <span>{{book.Amount}}</span>
+                        <br />
+                        <span>Price:</span>
+                        <span><b>{{book.Price}}</b></span>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        <ul class="windows-grid" ng-repeat="journal in ImportModel.Journals">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-journal"></span>
+                        <h4>{{journal.Title}} - {{journal.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{journal.Id}}" ng-model="journal.Selected">
+                            <label for="cb-sellected-{{journal.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{journal.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{journal.Title}}</span>
+                        <br />
+                        <span>Date:</span>
+                        <span>{{journal.Date}}</span>
+                        <br />
+                        <span>Periodicity:</span>
+                        <span>{{journal.Periodicity}}</span>
+                        <br />
+                        <span>Subjects:</span>
+                        <span>{{journal.Subjects}}</span>
+                        <br />
+                        <span>Available:</span>
+                        <span>{{journal.Amount}}</span>
+                        <br />
+                        <span>Price:</span>
+                        <span><b>{{journal.Price}}</b></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        <ul class="windows-grid" ng-repeat="newspaper in ImportModel.Newspapers">
+            <li class="window-wrapper">
+                <div class="window window-hovered-shadow">
+                    <div class="window-header justify">
+                        <span class="icon ic-newspaper"></span>
+                        <h4>{{newspaper.Title}} - {{newspaper.Date}}</h4>
+                        <div class="window-header-buttons">
+                            <input type="checkbox" class="checkbox-default" id="cb-sellected-{{newspaper.Id}}" ng-model="newspaper.Selected">
+                            <label for="cb-sellected-{{newspaper.Id}}" class="checkbox-default-label"></label>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="entity-photo" style="background-image: url('{{newspaper.PhotoPath}}')"></div> <!-- todo null photo handle-->
+                        <span>Title:</span>
+                        <span>{{newspaper.Title}}</span>
+                        <br />
+                        <span>Date:</span>
+                        <span>{{newspaper.Date}}</span>
+                        <br />
+                        <span>Periodicity:</span>
+                        <span>{{newspaper.Periodicity}}</span>
+                        <br />
+                        <span>Available:</span>
+                        <span>{{newspaper.Amount}}</span>
+                        <br />
+                        <span>Price:</span>
+                        <span><b>{{newspaper.Price}}</b></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

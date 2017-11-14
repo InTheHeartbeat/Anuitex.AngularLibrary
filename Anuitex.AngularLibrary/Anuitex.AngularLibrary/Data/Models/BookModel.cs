@@ -2,7 +2,7 @@
 
 namespace Anuitex.AngularLibrary.Data.Models
 {    
-    public partial class BookModel
+    public class BookModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -13,7 +13,7 @@ namespace Anuitex.AngularLibrary.Data.Models
         public int Amount { get; set; }
         public double Price { get; set; }        
         public string PhotoPath { get; set; }
-        public int PhotoId { get; set; }        
+        public int? PhotoId { get; set; }        
         public BookModel(Book baseBook)
         {
             Id = baseBook.Id;

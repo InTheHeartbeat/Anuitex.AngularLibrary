@@ -18,8 +18,8 @@ namespace Anuitex.AngularLibrary.Controllers.API
 {
     public class ExportController : BaseApiController
     {        
-        [System.Web.Mvc.Route("api/Export/GetExportableBooks")]
-        [System.Web.Mvc.HttpGet]
+        [Route("api/Export/GetExportableBooks")]
+        [HttpGet]
         public ExportBooksModel GetExportableBooks()
         {
             return new ExportBooksModel()
@@ -27,10 +27,30 @@ namespace Anuitex.AngularLibrary.Controllers.API
                 Books = DataContext.Books.Select(book => new ExportableBookModel(book)).ToList(),
                 IsXml = true
             };
+        }        
+        
+        [HttpGet]
+        [Route("api/Export/GetExportableJournals")]
+        public ExportJournalsModel GetExportableJournals()
+        {
+            return new ExportJournalsModel()
+            {
+                Journals = DataContext.Journals.Select(j => new ExportableJournalModel(j)).ToList(),
+                IsXml = true
+            };
         }
-
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.Route("api/Export/TryExportBooks")]
+        [HttpGet]
+        [Route("api/Export/GetExportableNewspapers")]
+        public ExportNewspapersModel GetExportableNewspapers()
+        {
+            return new ExportNewspapersModel()
+            {
+                Newspapers = DataContext.Newspapers.Select(n => new ExportableNewspaperModel(n)).ToList(),
+                IsXml = true
+            };
+        }
+        
+        [Route("api/Export/TryExportBooks")]
         public IHttpActionResult TryExportBooks(ExportBooksModel model)
         {
             var result = new HttpResponseMessage(HttpStatusCode.OK)
@@ -47,44 +67,41 @@ namespace Anuitex.AngularLibrary.Controllers.API
 
             return response;
         }
-        /*
-        [HttpGet]
-        [Route("api/Export/GetJournals")]
-        public IQueryable<ExportableJournalModel> GetExportableJournals()
+       
+        [Route("api/Export/TryExportNewspapers")]
+        public IHttpActionResult TryExportNewspapers(ExportNewspapersModel model)
         {
-            return DataContext.Journals.Select(j => new ExportableJournalModel(j));
-        }
-        [HttpGet]
-        [Route("api/Export/GetNewspapers")]
-        public IQueryable<ExportableNewspaperModel> GetExportableNewspapers()
-        {
-            return DataContext.Newspapers.Select(n => new ExportableNewspaperModel(n));
-        }
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(ExportHelper.ExportNewspapers(model, DataContext))
+            };
+            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "exp-" + DateTime.Now + "-newspapers" + (model.IsXml ? ".xml" : ".txt")
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
+            var response = ResponseMessage(result);
+
+            return response;
+        }
         
-
-        [HttpPost]
-        [Route("api/Export/Journals")]
-        public FileResult TryExportJournals(ExportJournalsModel model)
+        [Route("api/Export/TryExportJournals")]
+        public IHttpActionResult TryExportJournals(ExportJournalsModel model)
         {
-            FileContentResult res = new FileContentResult(ExportHelper.ExportJournals(model, DataContext),
-                System.Net.Mime.MediaTypeNames.Application.Octet)
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                FileDownloadName = "exp-" + DateTime.Now + "-journals" + (model.IsXml ? ".xml" : ".txt")
+                Content = new ByteArrayContent(ExportHelper.ExportJournals(model, DataContext))
             };
-            return res;
-        }
+            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "exp-" + DateTime.Now + "-journals" + (model.IsXml ? ".xml" : ".txt")
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-        [HttpPost]
-        [Route("api/Export/Newspapers")]
-        public FileResult TryExportNewspapers(ExportNewspapersModel model)
-        {
-            FileContentResult res = new FileContentResult(ExportHelper.ExportNewspapers(model, DataContext),
-                System.Net.Mime.MediaTypeNames.Application.Octet)
-            {
-                FileDownloadName = "exp-" + DateTime.Now + "-newspapers" + (model.IsXml ? ".xml" : ".txt")
-            };
-            return res;
-        }*/
+            var response = ResponseMessage(result);
+
+            return response;
+        }        
     }
 }

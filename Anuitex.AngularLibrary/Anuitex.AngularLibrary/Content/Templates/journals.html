@@ -1,11 +1,9 @@
 ﻿<div ng-controller="journalsController">
     <div class="nav-sector-controls" ng-show="IsAdmin">
-        <div class="btn btn-icon" id="btn-import-journals">
+        <a href="#" class="btn btn-icon" id="btn-import-books" ng-click="showUploadDialog()">
             <span class="icon ic-import"></span>
-        </div>
-        <input id="btn-import-journals-file" type="file" name="upload" style="display: none">
-
-        <a class="btn btn-icon" href="#">
+        </a>
+        <a class="btn btn-icon" href="#" ng-click="export()">
             <span class="icon ic-export"></span>
         </a>
         <a class="btn btn-icon" href="#" ng-click="showAddJournalDialog()">
